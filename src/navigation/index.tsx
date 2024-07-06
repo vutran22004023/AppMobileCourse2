@@ -9,8 +9,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import HomeScreens from '@/screens/home'; 
 import LoginScreens from '@/screens/auth/login';
 import RegisterScreens from '@/screens/auth/register';
-import HomePage from '@/screens/homePage';
 import TabsBottom from '@/navigation/TabsBottom'
+import SearchScreen from '@/screens/search/search'
 SplashScreen.preventAutoHideAsync();
 export type RootStackParamList = {
   Overview: undefined;
@@ -19,16 +19,12 @@ export type RootStackParamList = {
   LoginScreens: { name: string };
   RegisterScreens: { name: string };
   TabsBottom: { name: string };
+  SearchScreen: {name:string}
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#161622', // Thiết lập màu nền ở đây
-  },
-});
+
 const customTheme = {
   ...DefaultTheme,
   colors: {
@@ -74,6 +70,7 @@ export default function RootStack() {
             <Stack.Screen name="LoginScreens" component={LoginScreens} options={{ headerShown: false }} />
             <Stack.Screen name="RegisterScreens" component={RegisterScreens} options={{ headerShown: false }} />
             <Stack.Screen name="TabsBottom" component={TabsBottom} options={{ headerShown: false }} />
+            <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: true }} />
           </Stack.Navigator>
         </NavigationContainer>
     </QueryClientProvider>

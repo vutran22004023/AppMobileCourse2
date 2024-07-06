@@ -1,7 +1,7 @@
 
 import axios from 'axios';
-import { ILogin, IRegister } from '~/types';
-const url = 'http://192.168.1.12:3002'
+import { ILogin, IRegister } from '@/types';
+const url = 'http://192.168.1.10:3002'
 const LoginService = async(data : ILogin)=> {
     try {
         const res = await axios.post(`${url}/api/login-in`, data)
