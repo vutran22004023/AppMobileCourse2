@@ -70,7 +70,7 @@ export default function RootStack() {
             <Stack.Screen name="LoginScreens" component={LoginScreens} options={{ headerShown: false }} />
             <Stack.Screen name="RegisterScreens" component={RegisterScreens} options={{ headerShown: false }} />
             <Stack.Screen name="TabsBottom" component={TabsBottom} options={{ headerShown: false }} />
-            <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: true }} />
+            <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: false }} />
           </Stack.Navigator>
         </NavigationContainer>
     </QueryClientProvider>

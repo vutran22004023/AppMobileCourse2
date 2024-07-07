@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {icons} from '@/constants'
 import { Image, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -14,10 +14,13 @@ interface IProps {
   }
 
   const SearchInput: React.FC<any> = ({  ...props }) => {
+    const {initsearch} =props
     const navigation = useNavigation();
     const [isFocused, setIsFocused] = useState(false);
     const [query, setQuery] = useState<string>()
-  
+    useEffect(() => {
+      setQuery(initsearch)
+    },[initsearch])
     return (
 
         <View className={`w-full h-16 px-4 bg-black-100 rounded-2xl flex-row items-center border-2 space-x-4 ${isFocused ? 'border-orange-400' : 'border-black-100'}`}>

@@ -13,6 +13,7 @@ import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
 import clock from "../assets/icons/clock.png";
 import users from "../assets/icons/users-round.png"
+import left from "../assets/icons/arrow-left.png";
 export default {
   play,
   bookmark,
@@ -28,5 +29,6 @@ export default {
   eyeHide,
   eye,
   clock,
-  users
+  users,
+  left
 };
