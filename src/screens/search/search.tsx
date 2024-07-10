@@ -64,7 +64,7 @@ const { search } = route.params;
       ListEmptyComponent={() => (
         <EmptyState
         title="Không có khóa học"
-        subTilte="Hiện tại ko có khóa học này"
+        subTilte="Hiện tại không có khóa học này"
         />
       )}
       />

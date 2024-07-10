@@ -87,7 +87,7 @@ const TabsBottom = () => {
           headerShown: false,
           tabBarIcon: ({ color, focused, size }) => ( // Chỉnh sửa để trả về một React Node
             <TabIcon
-              icon={icons.home}
+              icon={icons.profile}
               focused={focused} 
               color={color}
               size={size}

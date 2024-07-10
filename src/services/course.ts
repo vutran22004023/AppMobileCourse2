@@ -1,6 +1,6 @@
 
 import axios,{ AxiosResponse } from 'axios';
-const url = 'http://192.168.1.10:3002'
+import { url } from './url';
 const GetAllCourses = async() => {
     try{
         const response: AxiosResponse = await axios.get(`${url}/api/course/all-courses`);
