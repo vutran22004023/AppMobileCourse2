@@ -1,7 +1,9 @@
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer,DefaultTheme  } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { Provider } from "react-redux";
+import { store, persistor } from "@/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
@@ -63,6 +65,8 @@ export default function RootStack() {
 
   if (!fontsLoaded && !error) return null;
   return (
+    <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
     <QueryClientProvider client={queryClient}>
         <NavigationContainer theme={customTheme}>
           <Stack.Navigator initialRouteName="HomeScreens">
@@ -74,5 +78,7 @@ export default function RootStack() {
           </Stack.Navigator>
         </NavigationContainer>
     </QueryClientProvider>
+    </PersistGate>
+    </Provider>
   );
 }

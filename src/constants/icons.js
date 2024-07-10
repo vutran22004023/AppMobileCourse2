@@ -14,6 +14,13 @@ import play from "../assets/icons/play.png";
 import clock from "../assets/icons/clock.png";
 import users from "../assets/icons/users-round.png"
 import left from "../assets/icons/arrow-left.png";
+// import logout from '../assets/images/log-out.png';
+import blog from "../assets/icons/notebook-pen.png";
+import blogsave from "../assets/icons/book-up.png";
+import blogme from "../assets/icons/book-text.png";
+import filekey from "../assets/icons/file-key.png";
+import setting from "../assets/icons/settings.png";
+
 export default {
   play,
   bookmark,
@@ -30,5 +37,10 @@ export default {
   eye,
   clock,
   users,
-  left
+  left,
+  blog,
+  blogsave,
+  blogme,
+  filekey,
+  setting
 };
