@@ -9,8 +9,11 @@ import {LoginService} from '@/services/loginRegister'
 import { useMutationHook } from '@/hooks';
 import { ILogin } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch,useSelector } from 'react-redux';
+import {updateUser} from '@/redux/Slide/userSlide'
 const LoginScreens = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch()
   const [valueLogin, setValueLogin] = useState({
     email: '',
     password: '',
@@ -36,23 +39,12 @@ const LoginScreens = () => {
     return res;
   });
 
-   // Function to check if the input is a valid email format
-   const isValidEmail = (email: string): boolean => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
-
-  // Function to check if password meets the criteria
-  const isValidPassword = (password: string): boolean => {
-    // Password must be at least 6 characters, contain special character, and have at least one uppercase letter
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-    return regex.test(password);
-  };
-
   const { data: dataLogin, isPending: isLoading, isError,error } = mutationLogin;
 
   useEffect(() => {
     if(dataLogin?.status === 200) {
       saveToken(dataLogin.access_Token);
+      navigation.navigate('TabsBottom')
     }
   },[dataLogin])
   const submit = () => {

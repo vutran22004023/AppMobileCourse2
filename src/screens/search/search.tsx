@@ -50,7 +50,7 @@ const { search } = route.params;
       ListHeaderComponent={() => (
         <View className='my-6 px-4  mt-[25px] mb-[24px]'>
           <View className='justify-between items-start flex-row mb-6'>
-          <CustomButtonIcon icon={icons.left} handlePress={() => navigation.navigate('TabsBottom')}/>
+          <CustomButtonIcon icon={icons.left} handlePress={() => navigation.goBack()}/>
           <View className='mr-3'>
               <Text className='font-pmedium text-sm text-gray-100 text-right'>Từ khóa tìm kiếm</Text>
               <Text className='text-2xl font-psemibold text-white  text-right'>"{search}"</Text>

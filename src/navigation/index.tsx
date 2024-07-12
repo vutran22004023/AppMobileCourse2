@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer,DefaultTheme  } from '@react-navigation/native';
+import PrivateLogin from '@/contexts/private'
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from "react-redux";
 import { store, persistor } from "@/redux/store";
@@ -8,6 +9,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
+import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import HomeScreens from '@/screens/home'; 
 import LoginScreens from '@/screens/auth/login';
 import RegisterScreens from '@/screens/auth/register';
@@ -22,6 +25,7 @@ export type RootStackParamList = {
   RegisterScreens: { name: string };
   TabsBottom: { name: string };
   SearchScreen: {name:string}
+
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -68,15 +72,20 @@ export default function RootStack() {
     <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
     <QueryClientProvider client={queryClient}>
+      <GestureHandlerRootView>
         <NavigationContainer theme={customTheme}>
+        <PrivateLogin>
           <Stack.Navigator initialRouteName="HomeScreens">
             <Stack.Screen name="HomeScreens" component={HomeScreens} options={{ headerShown: false }} />
             <Stack.Screen name="LoginScreens" component={LoginScreens} options={{ headerShown: false }} />
             <Stack.Screen name="RegisterScreens" component={RegisterScreens} options={{ headerShown: false }} />
             <Stack.Screen name="TabsBottom" component={TabsBottom} options={{ headerShown: false }} />
             <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: false }} />
+            {/* <Stack.Screen name="VideoCourse" component={VideoCourse} options={{ headerShown: false }} /> */}
           </Stack.Navigator>
+          </PrivateLogin>
         </NavigationContainer>
+        </GestureHandlerRootView>
     </QueryClientProvider>
     </PersistGate>
     </Provider>

@@ -8,9 +8,24 @@ import EmptyState from '@/components/EmptyStateComponment/emptyState'
 import {GetAllCourses} from '@/services/course'
 import { useQuery } from "@tanstack/react-query";
 import CardCourse from '@/components/CardComponment/card'
-const HomePages = () => {
-  const [refreshing, setRefreshing] = useState(false);
+import { useSelector } from 'react-redux'
+import { RootState } from "@/redux/store";
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
+const HomePages = () => {
+  const navigation = useNavigation()
+  const [refreshing, setRefreshing] = useState(false);
+  const user = useSelector((state: RootState) => state.user);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!user?.access_Token && !user?.isAdmin && user?.status !== true) {
+        navigation.navigate('LoginScreens');
+      }
+    }, 2000); // 3000 milliseconds = 3 seconds
+
+    // Cleanup the timeout if the component unmounts or user changes
+    return () => clearTimeout(timer);
+  }, [user, navigation]);
   const onRefresh = async () => {
     setRefreshing(true)
     refreshAllCourse()
@@ -48,7 +63,7 @@ const HomePages = () => {
           <View className='justify-between items-start flex-row mb-6'>
             <View>
               <Text className='font-pmedium text-sm text-gray-100'>Wecome Back</Text>
-              <Text className='text-2xl font-psemibold text-white'>JSMaster</Text>
+              <Text className='text-2xl font-psemibold text-white'>{user.name}</Text>
             </View>
             <View className='mt-1.5'>
             <Image source={images.logoSmall} className='w-9 h-10' resizeMode='contain'/>

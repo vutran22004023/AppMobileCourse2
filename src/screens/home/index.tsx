@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const HomeScreens  = () => {
   const navigation = useNavigation();
+
   return (
     <SafeAreaView style={{backgroundColor:'#161622', height:'100%'}}>
       <ScrollView contentContainerStyle={{ height: "100%" }}>
@@ -41,7 +42,7 @@ const HomeScreens  = () => {
           />
           <ButtonComponment  
             title="Continue with Email"
-            handlePress={() => navigation.navigate('TabsBottom')}
+            handlePress={() => navigation.navigate('VideoCourse')}
             textStyles=""
             containerStyles="w-full mt-7"
           />

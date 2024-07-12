@@ -1,9 +1,28 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Image, StyleSheet, Text, View,TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 import {icons} from '@/constants'
+import Modal from 'react-native-modal';
+import { PanGestureHandler, State } from 'react-native-gesture-handler';
+import VideoCourse from '@/screens/videoCourse/videoCourse';
 const CardCourse = ({course: {name, image, slug,price},key}: any) => {
+    const [isModalVisible, setModalVisible] = useState(false);
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+      };
+    
+      const onGestureEvent = ({ nativeEvent }:any) => {
+        if (nativeEvent.translationY > 100) {
+          setModalVisible(false);
+        }
+      };
+    
+      const onHandlerStateChange = ({ nativeEvent }: any) => {
+        if (nativeEvent.state === State.END && nativeEvent.translationY > 100) {
+          setModalVisible(false);
+        }
+      };
   return (
-    <View className='flex-col items-center px-4 mb-14' key={key}>
+    <TouchableOpacity className='flex-col items-center px-4 mb-14' key={key} onPress={toggleModal} activeOpacity={0.7}>
     <View className='flex-row gap-3 items-start'>
         <View className='flex-1 rounded-2xl border border-secondary overflow-hidden'>
             <View className='w-full h-[200px] justify-center items-center'>
@@ -29,7 +48,23 @@ const CardCourse = ({course: {name, image, slug,price},key}: any) => {
             </View>
         </View>
     </View>
-</View>
+    <Modal
+        isVisible={isModalVisible}
+        swipeDirection={['down']}
+        onSwipeComplete={toggleModal}
+        style={{ justifyContent: 'flex-end', margin: 0 }}
+        propagateSwipe
+      >
+        <PanGestureHandler
+          onGestureEvent={onGestureEvent}
+          onHandlerStateChange={onHandlerStateChange}
+        >
+          <View style={{ height: '100%'}}>
+            <VideoCourse/>
+          </View>
+        </PanGestureHandler>
+      </Modal>
+</TouchableOpacity>
   )
 }
 
