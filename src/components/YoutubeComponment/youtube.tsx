@@ -19,7 +19,7 @@ const Youtube = () => {
     <View>
       <YoutubePlayer
         ref={playerRef}
-        height={300}
+        height={250}
         play={playing}
         videoId={'ECxVfrwwTp0'}
         onChangeState={onStateChange}
