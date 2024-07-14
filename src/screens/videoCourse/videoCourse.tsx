@@ -3,25 +3,26 @@ import { FlatList, Image, RefreshControl, StyleSheet, Text, TouchableOpacity, Vi
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images, icons } from '@/constants';
-import SearchInput from '@/components/SearchInputComponment/searchInput';
-import Trending from '@/components/TrendingComponment/trending';
 import EmptyState from '@/components/EmptyStateComponment/emptyState';
 import { useQuery } from '@tanstack/react-query';
 import CardCourse from '@/components/CardComponment/card';
 import { useNavigation } from '@react-navigation/native';
-
-import VideoComponent from '@/components/YoutubeComponment/youtube';
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import WebViewPlayer from '@/components/YoutubeComponment/youtube';
 import Accordion from '@/components/accordionComponment/accordion';
 import { ScrollView } from 'react-native-gesture-handler';
 import CircularProgress from '@/components/CircularProgressComponment/circularProgress';
-
+import {formatDate} from '@/libs/utils'
 interface VideoModalComponentProps {
   isVisible: boolean;
   onClose: () => void;
-}
-const VideoCourse = () => {
-  const navigation = useNavigation();
 
+}
+const VideoCourse = ({course}:any) => {
+  const timeVideo = useSelector((state: RootState) => state.timesVideo);
+  console.log(timeVideo)
+  const user = useSelector((state: RootState) => state.user);
   return (
     <SafeAreaView
       style={{ backgroundColor: '#161622', flex: 1 }}
@@ -34,13 +35,13 @@ const VideoCourse = () => {
         renderItem={({ item, index }) => <CardCourse course={item} key={index} />}
         ListHeaderComponent={() => (
           <View className="my-6 mb-[24px] mt-[25px] ">
-              <VideoComponent />
+              <WebViewPlayer src="https://www.youtube.com/embed/2Qx4SEYeVj8" />
             <View className='flex-row justify-between mx-1'>
               <View className=' my-4 mx-2 w-[80%]'>
-                <Text className='text-xl font-extrabold text-white font-pmedium'>Tổng quan về khóa học HTML CSS</Text>
+                <Text className='text-xl font-extrabold text-white font-pmedium'>{course?.name}</Text>
                 <View className='mt-2 flex-row gap-3'>
-                <Text className='text-ml font-normal text-white font-pmedium '>4324 lượt xem</Text>
-                <Text className='text-ml font-normal text-white font-pmedium '>Cập nhập: 14/2/2024</Text>
+                <Text className='text-ml font-normal text-white font-pmedium '>{course?.view} lượt xem</Text>
+                <Text className='text-ml font-normal text-white font-pmedium '>Cập nhập: {formatDate(course?.updatedAt)}</Text>
                 </View>
               </View>
               <View style={{ justifyContent: 'center', alignItems: 'center', width: '20%' }}>

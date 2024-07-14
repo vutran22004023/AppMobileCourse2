@@ -11,10 +11,14 @@ import CardCourse from '@/components/CardComponment/card'
 import { useSelector } from 'react-redux'
 import { RootState } from "@/redux/store";
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-
+import Modal from 'react-native-modal';
+import { PanGestureHandler, State } from 'react-native-gesture-handler';
+import VideoCourse from '@/screens/videoCourse/videoCourse';
 const HomePages = () => {
   const navigation = useNavigation()
   const [refreshing, setRefreshing] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
   const user = useSelector((state: RootState) => state.user);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -45,8 +49,27 @@ const HomePages = () => {
     queryFn: refreshAllCourse,
   });
 
+  const toggleModal = () => {
+      setModalVisible(!isModalVisible);
+    };
+  
+    const onGestureEvent = ({ nativeEvent }:any) => {
+      if (nativeEvent.translationY > 100) {
+        setModalVisible(false);
+      }
+    };
+  
+    const onHandlerStateChange = ({ nativeEvent }: any) => {
+      if (nativeEvent.state === State.END && nativeEvent.translationY > 100) {
+        setModalVisible(false);
+      }
+    };
 
 
+    const handleCardPress = (course: any) => {
+      setSelectedCourse(course);
+      toggleModal();
+    }
 
   return (
     <SafeAreaView style={{backgroundColor:'#161622'}} className='border-2 border-red-500 flex-1'>
@@ -55,8 +78,8 @@ const HomePages = () => {
       data={dataAllCourses}
       // data={[]}
       keyExtractor={(item) => item?.id}
-      renderItem={({item, index},)=> (
-        <CardCourse course={item} key={index}/>
+      renderItem={({item, index}) => (
+        <CardCourse course={item} key={index} onPress={() => handleCardPress(item)} />
       )}
       ListHeaderComponent={() => (
         <View className='my-6 px-4  mt-[24px] mb-[24px]'>
@@ -88,6 +111,23 @@ const HomePages = () => {
       )}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
       />
+
+      <Modal
+        isVisible={isModalVisible}
+        swipeDirection={['down']}
+        onSwipeComplete={toggleModal}
+        style={{ justifyContent: 'flex-end', margin: 0 }}
+        propagateSwipe
+      >
+        <PanGestureHandler
+          onGestureEvent={onGestureEvent}
+          onHandlerStateChange={onHandlerStateChange}
+        >
+          <View style={{ height: '100%'}}>
+            {selectedCourse && <VideoCourse course={selectedCourse} />}
+          </View>
+        </PanGestureHandler>
+      </Modal>
     </SafeAreaView>
   )
 }

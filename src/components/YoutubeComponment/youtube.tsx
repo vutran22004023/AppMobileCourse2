@@ -1,33 +1,32 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
-import React, { useRef, useState } from 'react'
-import YoutubePlayer from 'react-native-youtube-iframe';
-const Youtube = () => {
-    const [playing, setPlaying] = useState(false);
-  const playerRef = useRef(null);
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { WebView } from 'react-native-webview';
 
-  const onStateChange = (state) => {
-    if (state === 'ended') {
-      setPlaying(false);
-      alert('Video has finished playing!');
-    }
-  };
-
-  const togglePlaying = () => {
-    setPlaying((prev) => !prev);
-  };
-  return (
-    <View>
-      <YoutubePlayer
-        ref={playerRef}
-        height={250}
-        play={playing}
-        videoId={'ECxVfrwwTp0'}
-        onChangeState={onStateChange}
-      />
-    </View>
-  )
+interface WebViewPlayerProps {
+  src: string;
 }
 
-export default Youtube
+const WebViewPlayer: React.FC<WebViewPlayerProps> = ({ src }) => {
+  return (
+    <View style={styles.container}>
+      <WebView
+        source={{ uri: src }}
+        style={styles.webview}
+      />
+    </View>
+  );
+};
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  webview: {
+    width: '100%',
+    height: 300,
+  },
+});
+
+export default WebViewPlayer;
