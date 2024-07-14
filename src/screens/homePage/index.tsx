@@ -25,7 +25,7 @@ const HomePages = () => {
       if (!user?.access_Token && !user?.isAdmin && user?.status !== true) {
         navigation.navigate('LoginScreens');
       }
-    }, 2000); // 3000 milliseconds = 3 seconds
+    }, 3000); // 3000 milliseconds = 3 seconds
 
     // Cleanup the timeout if the component unmounts or user changes
     return () => clearTimeout(timer);
@@ -45,7 +45,7 @@ const HomePages = () => {
   }
 
   const { data: dataAllCourses, isPending: __isPendingState } = useQuery({
-    queryKey: ["dataLUserCouse"],
+    queryKey: ["dataCouse"],
     queryFn: refreshAllCourse,
   });
 

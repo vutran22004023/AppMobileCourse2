@@ -107,7 +107,6 @@ const PrivateLogin: React.FC<GlobalProviderProps> = ({ children }) => {
           token: `Bearer ${accessToken}`,
         },
       });
-      
       dispatch(updateUser({ ...response.data.data, access_Token: accessToken }));
     } catch (error) {
       console.error('Error fetching user details:', error);

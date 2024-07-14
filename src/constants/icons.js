@@ -20,7 +20,8 @@ import blogsave from "../assets/icons/book-up.png";
 import blogme from "../assets/icons/book-text.png";
 import filekey from "../assets/icons/file-key.png";
 import setting from "../assets/icons/settings.png";
-
+import lock from "../assets/icons/lock.png";
+import circle_Check from "../assets/icons/circle-check.png";
 export default {
   play,
   bookmark,
@@ -42,5 +43,7 @@ export default {
   blogsave,
   blogme,
   filekey,
-  setting
+  setting,
+  lock,
+  circle_Check
 };
