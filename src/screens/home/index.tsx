@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, ScrollView, Image } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from "react-native-safe-area-context";
 import {images} from '@/constants'
-import ButtonComponment from '@/components/buttonComponment/button'
+import ButtonComponment from '@/components/Button/button'
 import { useNavigation } from '@react-navigation/native';
 
 const HomeScreens  = () => {

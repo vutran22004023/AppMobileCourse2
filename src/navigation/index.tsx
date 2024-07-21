@@ -16,6 +16,7 @@ import LoginScreens from '@/screens/auth/login';
 import RegisterScreens from '@/screens/auth/register';
 import TabsBottom from '@/navigation/TabsBottom'
 import SearchScreen from '@/screens/search/search'
+import SettingScreen from '@/screens/setting'
 SplashScreen.preventAutoHideAsync();
 export type RootStackParamList = {
   Overview: undefined;
@@ -25,7 +26,7 @@ export type RootStackParamList = {
   RegisterScreens: { name: string };
   TabsBottom: { name: string };
   SearchScreen: {name:string}
-
+  SettingScreen: {name:string}
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -81,7 +82,7 @@ export default function RootStack() {
             <Stack.Screen name="RegisterScreens" component={RegisterScreens} options={{ headerShown: false }} />
             <Stack.Screen name="TabsBottom" component={TabsBottom} options={{ headerShown: false }} />
             <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: false }} />
-            {/* <Stack.Screen name="VideoCourse" component={VideoCourse} options={{ headerShown: false }} /> */}
+            <Stack.Screen name="SettingScreen" component={SettingScreen} options={{ headerShown: false }} />
           </Stack.Navigator>
           </PrivateLogin>
         </NavigationContainer>

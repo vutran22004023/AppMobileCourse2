@@ -3,19 +3,20 @@ import { FlatList, Image, RefreshControl, StyleSheet, Text, TouchableOpacity, Vi
 import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images, icons } from '@/constants';
-import EmptyState from '@/components/EmptyStateComponment/emptyState';
+import EmptyState from '@/components/EmptyState/emptyState';
 import { useQuery } from '@tanstack/react-query';
-import CardCourse from '@/components/CardComponment/card';
+import CardCourse from '@/components/Card/card';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import WebViewPlayer from '@/components/YoutubeComponment/youtube';
-import Accordion from '@/components/accordionComponment/accordion';
+import WebViewPlayer from '@/components/Youtube/youtube';
+import Accordion from '@/components/Accordion/accordion';
 import { ScrollView } from 'react-native-gesture-handler';
-import CircularProgress from '@/components/CircularProgressComponment/circularProgress';
+import CircularProgress from '@/components/CircularProgress/circularProgress';
 import {formatDate} from '@/libs/utils'
 import StartCourseServices from '@/services/userCourse'
 import { useMutationHook } from '@/hooks';
+import { startPlayback, stopPlayback } from "@/redux/Slide/playbackSlice";
 interface VideoModalComponentProps {
   isVisible: boolean;
   onClose: () => void;
@@ -26,9 +27,11 @@ interface VideoCourseProps {
 }
 const VideoCourse = ({course}:VideoCourseProps) => {
   const timeVideo = useSelector((state: RootState) => state.timesVideo);
+  console.log(timeVideo)
   const user = useSelector((state: RootState) => state.user);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [dataVideo, setDataVideo] = useState()
+  const dispatch = useDispatch();
   const playbackIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const [playbackTime, setPlaybackTime] = useState<number>(0);
   const initialActiveVideoRef = useRef<any>(null); 
@@ -92,45 +95,13 @@ const VideoCourse = ({course}:VideoCourseProps) => {
     }
   }
 
-  const timeStringToSeconds = (timeString: any) => {
-    if (typeof timeString !== "string") {
-      console.error("Invalid timeString:", timeString);
-      return 0;
-    }
-    const [minutes, seconds] = timeString.split(':').map(Number);
-    return minutes * 60 + seconds;
-  };
-
   useEffect(() => {
-    if (dataVideo?.time && timeVideo.isPlaying) { // Check if isPlaying is true
-      const videoDurationInSeconds = timeStringToSeconds(dataVideo.time);
-      const halfDuration = videoDurationInSeconds / 2;
-      const incrementPlaybackTime = () => {
-        setPlaybackTime(prevTime => {
-          const newTime = prevTime + 1;
-          if (Math.abs(newTime - halfDuration) <= 1) {
-            console.log('Thành công khóa học');
-            mutationUpdateCourse.mutate({userId:user.id,courseId: course?._id, videoId:dataVideo?._id })
-          }
-          return newTime;
-        });
-      };
-
-      // playbackIntervalRef.current = setInterval(incrementPlaybackTime, 1000);
-
-      return () => {
-        if (playbackIntervalRef.current) {
-          clearInterval(playbackIntervalRef.current);
-        }
-      };
+    if (timeVideo.isPlaying === true) {
+      dispatch(startPlayback(dataVideo, user, course));
     } else {
-      // Pause the playback if isPlaying is false or video data is not available
-      if (playbackIntervalRef.current) {
-        clearInterval(playbackIntervalRef.current);
-        playbackIntervalRef.current = null;
-      }
+      dispatch(stopPlayback());
     }
-  }, [timeVideo.isPlaying, dataVideo]);
+  }, [timeVideo.isPlaying]);
 
 
   const mergedChapters = course?.chapters?.map((chapter: any) => {

@@ -4,13 +4,13 @@ import { FlatList, Image, RefreshControl, StyleSheet, Text, View } from 'react-n
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {images, icons}from '@/constants'
-import SearchInput from '@/components/SearchInputComponment/searchInput'
-import Trending from '@/components/TrendingComponment/trending'
-import EmptyState from '@/components/EmptyStateComponment/emptyState'
+import SearchInput from '@/components/SearchInput/searchInput'
+import Trending from '@/components/Trending/trending'
+import EmptyState from '@/components/EmptyState/emptyState'
 import {GetSearchCourses} from '@/services/course'
 import { useQuery } from "@tanstack/react-query";
-import CardCourse from '@/components/CardComponment/card'
-import CustomButtonIcon from '@/components/buttonComponment/buttonIcon';
+import CardCourse from '@/components/Card/card'
+import CustomButtonIcon from '@/components/Button/buttonIcon';
 import { useNavigation } from '@react-navigation/native';
 import { useMutationHook } from '@/hooks';
 const SearchScreen = () => {
@@ -48,16 +48,20 @@ const { search } = route.params;
         <CardCourse course={item} key={index}/>
       )}
       ListHeaderComponent={() => (
-        <View className='my-6 px-4  mt-[25px] mb-[24px]'>
-          <View className='justify-between items-start flex-row mb-6'>
+        <View className='my-6  mt-[25px] mb-[24px]'>
+          <View className='justify-between items-start px-4 flex-row mb-6'>
           <CustomButtonIcon icon={icons.left} handlePress={() => navigation.goBack()}/>
           <View className='mr-3'>
               <Text className='font-pmedium text-sm text-gray-100 text-right'>Từ khóa tìm kiếm</Text>
               <Text className='text-2xl font-psemibold text-white  text-right'>"{search}"</Text>
             </View>
           </View>
+          <View className='w-full h-[1px] bg-white'></View>
         
-          <SearchInput initsearch ={search}/>
+        <View className='my-2'>
+        <SearchInput initsearch ={search}/>
+        </View>
+          
 
         </View>
       )}

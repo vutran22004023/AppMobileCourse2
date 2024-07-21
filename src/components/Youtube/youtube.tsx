@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { useDispatch } from 'react-redux';
 import { timeVideos } from '@/redux/Slide/timeVideoSide';
@@ -30,11 +30,11 @@ const VideoYoutubeComponent: React.FC<YouTubeComponentProps> = ({ src, style }) 
   const playerRef = useRef<any>(null);
 
   const onStateChange = useCallback(async (state: string) => {
-    if(state === 'playing') {
+    if (state === 'playing') {
       setIsPlaying(true);
       dispatch(timeVideos({ isPlaying: true }));
     }
-    if(state === 'paused') {
+    if (state === 'paused' || state === 'ended') {
       if (playerRef.current) {
         const time = await playerRef.current.getCurrentTime();
         setCurrentTime(time);
@@ -43,17 +43,7 @@ const VideoYoutubeComponent: React.FC<YouTubeComponentProps> = ({ src, style }) 
       setIsPlaying(false);
       dispatch(timeVideos({ isPlaying: false }));
     }
-    if(state === 'ended') {
-      if (playerRef.current) {
-        const time = await playerRef.current.getCurrentTime();
-        setCurrentTime(time);
-        dispatch(timeVideos({ time: formatTime(time), isPlaying: false }));
-      }
-      setIsPlaying(false);
-      dispatch(timeVideos({ isPlaying: false }));
-    }
-  }, []);
-
+  }, [dispatch]);
 
   if (!videoId) {
     return <Text>Invalid YouTube URL</Text>;
@@ -65,8 +55,8 @@ const VideoYoutubeComponent: React.FC<YouTubeComponentProps> = ({ src, style }) 
         height={250}
         play={isPlaying}
         videoId={videoId}
+        ref={playerRef}
         onChangeState={onStateChange}
-
       />
     </View>
   );

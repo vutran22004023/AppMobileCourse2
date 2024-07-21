@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, View, Image, Text, Alert, TouchableOpacity } from 'react-native';
-import FormField from '@/components/formFieldComponment/formField';
+import FormField from '@/components/FormField/formField';
 import { images } from '@/constants';
-import ButtonComponent from '@/components/buttonComponment/button';
+import ButtonComponent from '@/components/Button/button';
 import { useNavigation } from '@react-navigation/native';
 import {LoginService} from '@/services/loginRegister'
 import { useMutationHook } from '@/hooks';

@@ -2,16 +2,21 @@ import { FlatList, Image, RefreshControl, StyleSheet, Text, View,TouchableOpacit
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {images, icons}from '@/constants'
-import InfoBox from '@/components/InforBoxComponment/InfoBox'
-import Trending from '@/components/TrendingComponment/trending'
-import EmptyState from '@/components/EmptyStateComponment/emptyState'
+import InfoBox from '@/components/InforBox/InfoBox'
+import Trending from '@/components/Trending/trending'
+import EmptyState from '@/components/EmptyState/emptyState'
 import {GetAllCourses} from '@/services/course'
 import { useQuery } from "@tanstack/react-query";
-import CardCourse from '@/components/CardComponment/card'
-import CustomButton from '@/components/buttonComponment/button'
+import CardCourse from '@/components/Card/card'
+import CustomButton from '@/components/Button/button'
+import { useSelector } from 'react-redux'
+import { RootState } from "@/redux/store";
+import { useNavigation } from '@react-navigation/native'
 const ProfilePage = () => {
-  const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation()
+  const [refreshing, setRefreshing] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const user = useSelector((state: RootState) => state.user);
   const onRefresh = async () => {
     setRefreshing(true)
     refreshAllCourse()
@@ -72,7 +77,7 @@ const ProfilePage = () => {
                   resizeMode="cover"
                 />
               </View>
-              <InfoBox title="123123" containerStyles="mt-5" titleStyles="text-lg" />
+              <InfoBox title={user.name} containerStyles="mt-5" titleStyles="text-lg" />
               <View className=" flex-row gap-6">
                 <InfoBox
                   title="132312"
@@ -106,12 +111,6 @@ const ProfilePage = () => {
               {isOpen === false ? (
                 <View className=" w-full">
                   <TouchableOpacity
-                    className={`mb-3 w-full items-center justify-center rounded-lg  bg-black-200 pb-4 pt-4`}
-                    activeOpacity={0.7}>
-                    <Image source={icons.profile} className='w-6 h-6 absolute left-6'  style={{tintColor: '#fff'}}/>
-                    <Text className="text-white">Trang cá nhân</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
                     className={`mb-3 w-full items-center justify-center rounded-lg  bg-black-200 pb-4 pt-4`} 
                     activeOpacity={0.7}>
                     <Image source={icons.blog} className='w-7 h-7 absolute left-6' style={{tintColor: '#fff'}}/>
@@ -138,7 +137,9 @@ const ProfilePage = () => {
                     </TouchableOpacity>
                     <TouchableOpacity
                       className={`mb-3 w-full items-center justify-center rounded-lg  bg-black-200 pb-4 pt-4`}
-                      activeOpacity={0.7}>
+                      activeOpacity={0.7}
+                      onPress={()=>  navigation.navigate('SettingScreen')}
+                      >
                         <Image source={icons.setting} className='w-7 h-7 absolute left-6' style={{tintColor: '#fff'}}/>
                       <Text className="text-white">Cài đặt</Text>
                     </TouchableOpacity>

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs';
 import HomePage from '@/screens/homePage';
-import TabIcon from '@/components/TabIconComponment/tabIcon';
+import TabIcon from '@/components/TabIcon/tabIcon';
 import {icons} from '@/constants'
 import CoursePage from '@/screens/course';
 import ProfilePage from '@/screens/profile'

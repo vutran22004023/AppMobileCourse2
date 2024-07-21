@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import {images} from '@/constants'
-import CustomButton from '../buttonComponment/button'
+import CustomButton from '../Button/button'
 const EmptyState = ({title, subTilte}: any) => {
   return (
     <View className='justify-center items-center px-4 mt-[24px] mb-[24px]'>

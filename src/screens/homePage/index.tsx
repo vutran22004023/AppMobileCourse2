@@ -2,12 +2,12 @@ import { FlatList, Image, RefreshControl, StyleSheet, Text, View } from 'react-n
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {images}from '@/constants'
-import SearchInput from '@/components/SearchInputComponment/searchInput'
-import Trending from '@/components/TrendingComponment/trending'
-import EmptyState from '@/components/EmptyStateComponment/emptyState'
+import SearchInput from '@/components/SearchInput/searchInput'
+import Trending from '@/components/Trending/trending'
+import EmptyState from '@/components/EmptyState/emptyState'
 import {GetAllCourses} from '@/services/course'
 import { useQuery } from "@tanstack/react-query";
-import CardCourse from '@/components/CardComponment/card'
+import CardCourse from '@/components/Card/card'
 import { useSelector } from 'react-redux'
 import { RootState } from "@/redux/store";
 import { useNavigation, useFocusEffect } from '@react-navigation/native';

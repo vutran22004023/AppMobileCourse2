@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userReducer from './Slide/userSlide'; // Adjust path as necessary
 import timeReducer from './Slide/timeVideoSide'
+import playbackReducer from './Slide/playbackSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // Define RootState
 export type RootState = ReturnType<typeof rootReducer>;
@@ -12,6 +13,7 @@ export type RootState = ReturnType<typeof rootReducer>;
 const rootReducer = combineReducers({
   user: userReducer,
   timesVideo: timeReducer,
+  playback: playbackReducer,
   // Add other reducers as needed
 });
 
