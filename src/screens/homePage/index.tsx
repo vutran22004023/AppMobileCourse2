@@ -85,7 +85,7 @@ const HomePages = () => {
         <View className='my-6 px-4  mt-[24px] mb-[24px]'>
           <View className='justify-between items-start flex-row mb-6'>
             <View>
-              <Text className='font-pmedium text-sm text-gray-100'>Wecome Back</Text>
+              <Text className='font-pmedium text-sm text-gray-100'>Chào mừng bạn !!</Text>
               <Text className='text-2xl font-psemibold text-white'>{user.name}</Text>
             </View>
             <View className='mt-1.5'>

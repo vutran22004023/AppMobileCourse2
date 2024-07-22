@@ -10,7 +10,7 @@ const HomeScreens  = () => {
 
   return (
     <SafeAreaView style={{backgroundColor:'#161622', height:'100%'}}>
-      <ScrollView contentContainerStyle={{ height: "100%" }}>
+      <ScrollView >
         <View className='w-full items-center h-full px-4 justify-center'>
         <Image
             source={images.logo}

@@ -56,7 +56,7 @@ const { search } = route.params;
               <Text className='text-2xl font-psemibold text-white  text-right'>"{search}"</Text>
             </View>
           </View>
-          <View className='w-full h-[1px] bg-white'></View>
+          <View className='w-full h-[1px] bg-orange-400'></View>
         
         <View className='my-2'>
         <SearchInput initsearch ={search}/>

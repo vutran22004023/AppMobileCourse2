@@ -17,7 +17,7 @@ const ComeBack = ({name}: Props) => {
             <Text className='font-pmedium text-xl text-gray-100 text-right'>{name}</Text>
         </View>
     </View>
-    <View className='w-full h-[1px] bg-white'></View>
+    <View className='w-full h-[1px] bg-orange-400'></View>
 </View>
   )
 }

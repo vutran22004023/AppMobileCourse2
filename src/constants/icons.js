@@ -22,6 +22,7 @@ import filekey from "../assets/icons/file-key.png";
 import setting from "../assets/icons/settings.png";
 import lock from "../assets/icons/lock.png";
 import circle_Check from "../assets/icons/circle-check.png";
+import course from '../assets/icons/course.png';
 export default {
   play,
   bookmark,
@@ -45,5 +46,6 @@ export default {
   filekey,
   setting,
   lock,
-  circle_Check
+  circle_Check,
+  course
 };

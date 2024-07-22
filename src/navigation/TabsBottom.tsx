@@ -37,7 +37,7 @@ const TabsBottom = () => {
               focused={focused} 
               color={color}
               size={size}
-              name="Home"
+              name="Trang chủ"
             />
             
           )
@@ -51,11 +51,11 @@ const TabsBottom = () => {
           headerShown: false,
           tabBarIcon: ({ color, focused, size }) => ( // Chỉnh sửa để trả về một React Node
             <TabIcon
-              icon={icons.home}
+              icon={icons.course}
               focused={focused} 
               color={color}
               size={size}
-              name="Course"
+              name="Khóa học"
             />
             
           )
@@ -73,7 +73,7 @@ const TabsBottom = () => {
               focused={focused} 
               color={color}
               size={size}
-              name="Blog"
+              name="Bài Viết"
             />
             
           )
@@ -91,7 +91,7 @@ const TabsBottom = () => {
               focused={focused} 
               color={color}
               size={size}
-              name="Profile"
+              name="Cá nhân"
             />
             
           )
