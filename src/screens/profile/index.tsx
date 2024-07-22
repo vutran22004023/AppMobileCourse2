@@ -113,7 +113,7 @@ const ProfilePage = () => {
                   <TouchableOpacity
                     className={`mb-3 w-full items-center justify-center rounded-lg  bg-black-200 pb-4 pt-4`} 
                     activeOpacity={0.7}>
-                    <Image source={icons.blog} className='w-7 h-7 absolute left-6' style={{tintColor: '#fff'}}/>
+                    <Image source={icons.blogwrite} className='w-7 h-7 absolute left-6' style={{tintColor: '#fff'}}/>
                     <Text className="text-white">Viết blog</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
