@@ -10,7 +10,7 @@ interface Props {
 const ComeBack = ({name}: Props) => {
     const navigation = useNavigation()
   return (
-    <View className='my-6 mt-[25px] mb-[24px]'>
+    <View className=' mt-[20px] '>
     <View className=' flex-row mb-6 px-4 gap-5 items-center'>
         <CustomButtonIcon icon={icons.left} handlePress={() => navigation.goBack()}/>
         <View className='mr-3'>

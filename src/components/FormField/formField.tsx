@@ -17,9 +17,9 @@ interface IProps {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   
     return (
-      <View className={`space-y-2 ${otherStyles}`}>
+      <View className={`space-y-1 ${otherStyles}`}>
         <Text className='text-base text-gray-100 font-pmedium mb-2'>{title}</Text>
-        <View className={`w-full h-16 px-4 bg-black-100 rounded-2xl flex-row items-center border-2 ${isFocused ? 'border-orange-400' : 'border-yellow-50'}`}>
+        <View className={`w-full h-14 px-4 bg-black-100 rounded-2xl flex-row items-center border-2 ${isFocused ? 'border-orange-400' : 'border-yellow-50'}`}>
           <TextInput
             className='flex-1 text-white font-psemibold text-base'
             value={value}

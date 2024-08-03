@@ -49,7 +49,14 @@ const CoursePage = () => {
               <CircularProgress
                 size={45}
                 width={5}
-                fill={images.react}
+                fill={images.html}
+                tintColor="blue"
+                backgroundColor="#e0e0e0"
+              />
+              <CircularProgress
+                size={45}
+                width={5}
+                fill={images.js}
                 tintColor="blue"
                 backgroundColor="#e0e0e0"
               />
@@ -63,21 +70,7 @@ const CoursePage = () => {
               <CircularProgress
                 size={45}
                 width={5}
-                fill={images.react}
-                tintColor="blue"
-                backgroundColor="#e0e0e0"
-              />
-              <CircularProgress
-                size={45}
-                width={5}
-                fill={images.react}
-                tintColor="blue"
-                backgroundColor="#e0e0e0"
-              />
-              <CircularProgress
-                size={45}
-                width={5}
-                fill={images.react}
+                fill={images.responsive}
                 tintColor="blue"
                 backgroundColor="#e0e0e0"
               />

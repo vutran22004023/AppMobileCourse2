@@ -12,9 +12,13 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CardBlog from '@/components/Card/cardBlog'
 import {blogPosts} from './data';
+import { useNavigation } from '@react-navigation/native'
 const BlogPage = () => {
+  const navigaion = useNavigation()
   const handleCardBlogPress = (item: any) => {
-
+    navigaion.navigate('BlogDetailScreen',{
+      blogDetail: item
+    })
   }
   return (
     <SafeAreaView style={{ backgroundColor: '#161622' }} className="flex-1 border-2 border-red-500">

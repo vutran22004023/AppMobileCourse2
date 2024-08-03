@@ -24,6 +24,7 @@ import lock from "../assets/icons/lock.png";
 import circle_Check from "../assets/icons/circle-check.png";
 import course from '../assets/icons/course.png';
 import blog from "../assets/icons/blog.png";
+import close from '../assets/icons/close.png';
 export default {
   play,
   bookmark,
@@ -49,5 +50,6 @@ export default {
   lock,
   circle_Check,
   course,
-  blogwrite
+  blogwrite,
+  close
 };

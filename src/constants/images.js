@@ -9,4 +9,24 @@ import fontend from '../assets/images/font-end.png';
 import backend from '../assets/images/back-end.png';
 import react from '../assets/images/react.png';
 import fbgroup from '../assets/images/fb-group.png';
-export default { profile, thumbnail, cards, path, logo, logoSmall, empty, fontend, backend,react,fbgroup };
+import html from '../assets/images/html.png';
+import js from '../assets/images/javascript.png';
+import responsive from '../assets/images/responsive.png';
+import node from '../assets/images/nodejs.png';
+export default {
+  profile,
+  thumbnail,
+  cards,
+  path,
+  logo,
+  logoSmall,
+  empty,
+  fontend,
+  backend,
+  react,
+  fbgroup,
+  html,
+  js,
+  responsive,
+  node,
+};
