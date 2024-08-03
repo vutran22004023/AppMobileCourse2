@@ -117,7 +117,7 @@ const LoginScreens = () => {
           <View className="flex-row justify-center gap-2 pt-5">
             <Text className="text-lg text-gray-100">Bạn chưa có tài khoản ?</Text>
             <TouchableOpacity onPress={() => navigation.navigate('RegisterScreens')}>
-              <Text className="text-lg font-semibold text-secondary text-[#fff]">Đăng kí</Text>
+              <Text className="text-lg font-semibold text-secondary">Đăng kí</Text>
             </TouchableOpacity>
           </View>
         </View>

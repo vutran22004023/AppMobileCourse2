@@ -3,14 +3,14 @@ import React from 'react'
 
 const tabIcon = ({icon, color, name, focused}: any) => {
   return (
-    <View className='items-center justify-center gap-2'>
+    <View className='items-center justify-center gap-2 w-14'>
       <Image
       source={icon}
       resizeMode='contain'
       tintColor={color}
-      className='w-7 h-7'
+      className='w-6 h-6'
       />
-      <Text className={`${focused ? 'font-psemibold': 'font-pregular'} text-xs`} style={{color: color}}>{name}</Text>
+      <Text className={`${focused ? 'font-psemibold': 'font-pregular'} text-[9px]`} style={{color: color}}>{name}</Text>
     </View>
   )
 }
