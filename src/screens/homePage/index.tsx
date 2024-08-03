@@ -20,16 +20,6 @@ const HomePages = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const user = useSelector((state: RootState) => state.user);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!user?.access_Token && !user?.isAdmin && user?.status !== true) {
-        navigation.navigate('LoginScreens');
-      }
-    }, 3000); // 3000 milliseconds = 3 seconds
-
-    // Cleanup the timeout if the component unmounts or user changes
-    return () => clearTimeout(timer);
-  }, [user, navigation]);
   const onRefresh = async () => {
     setRefreshing(true)
     refreshAllCourse()

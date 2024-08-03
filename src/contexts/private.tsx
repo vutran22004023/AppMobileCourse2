@@ -54,7 +54,6 @@ export const initializeUser = async (dispatch: AppDispatch,navigation) => {
     if (isTokenExpired(token)) {
       dispatch(resetUser());
       await removeToken();  // Remove expired token
-      navigation.navigate('LoginScreens');
     } else {
       try {
         const response = await GetDetailUser(id, token);
@@ -77,6 +76,5 @@ export const initializeUser = async (dispatch: AppDispatch,navigation) => {
     }
   } else {
     dispatch(resetUser());  // Reset user if no token is found
-    navigation.navigate('LoginScreens');
   }
 };
