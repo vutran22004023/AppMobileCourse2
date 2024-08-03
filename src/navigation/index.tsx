@@ -1,9 +1,8 @@
 import { StyleSheet, View } from 'react-native';
-import { NavigationContainer,DefaultTheme  } from '@react-navigation/native';
-import PrivateLogin from '@/contexts/private'
+import { NavigationContainer,DefaultTheme, useNavigation  } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Provider } from "react-redux";
-import { store, persistor } from "@/redux/store";
+import { Provider,useDispatch, useSelector } from "react-redux";
+import { store, persistor,AppDispatch, RootState  } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
@@ -18,6 +17,7 @@ import TabsBottom from '@/navigation/TabsBottom';
 import SearchScreen from '@/screens/search/search';
 import SettingScreen from '@/screens/setting';
 import BlogDetailScreen from '@/screens/blogDetail';
+import {initializeUser} from '@/contexts/private'
 SplashScreen.preventAutoHideAsync();
 export type RootStackParamList = {
   Overview: undefined;
@@ -40,6 +40,19 @@ const customTheme = {
     ...DefaultTheme.colors,
     background: '#161622', // Set your desired background color
   },
+};
+
+const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigation = useNavigation();
+  useEffect(() => {
+    const checkAuth = async () => {
+      initializeUser(dispatch,navigation); // Make sure you call the function
+    };
+    checkAuth();
+  }, [dispatch]);
+
+  return <>{children}</>;
 };
 
 export default function RootStack() {
@@ -77,7 +90,7 @@ export default function RootStack() {
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView>
         <NavigationContainer theme={customTheme}>
-        <PrivateLogin>
+        <AuthProvider>
           <Stack.Navigator initialRouteName="HomeScreens">
             <Stack.Screen name="HomeScreens" component={HomeScreens} options={{ headerShown: false }} />
             <Stack.Screen name="LoginScreens" component={LoginScreens} options={{ headerShown: false }} />
@@ -87,7 +100,7 @@ export default function RootStack() {
             <Stack.Screen name="SettingScreen" component={SettingScreen} options={{ headerShown: false }} />
             <Stack.Screen name="BlogDetailScreen" component={BlogDetailScreen} options={{ headerShown: false }} />
           </Stack.Navigator>
-          </PrivateLogin>
+          </AuthProvider>
         </NavigationContainer>
         </GestureHandlerRootView>
     </QueryClientProvider>

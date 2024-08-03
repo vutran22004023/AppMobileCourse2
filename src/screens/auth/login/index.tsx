@@ -8,24 +8,24 @@ import { useNavigation } from '@react-navigation/native';
 import {LoginService} from '@/services/loginRegister'
 import { useMutationHook } from '@/hooks';
 import { ILogin } from '@/types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch,useSelector } from 'react-redux';
 import {updateUser} from '@/redux/Slide/userSlide'
+import { store, persistor,AppDispatch, RootState  } from "@/redux/store";
+import { initializeUser } from '@/contexts/private';
+type DataLogin = {
+  status?: any;
+  access_Token?: string;
+  message?: string,
+  id?: string;
+};
 const LoginScreens = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation();
-  const dispatch = useDispatch()
   const [valueLogin, setValueLogin] = useState({
     email: '',
     password: '',
   });
 
-  const saveToken = async (token: string) => {
-    try {
-      await AsyncStorage.setItem('accessToken', token);
-    } catch (error) {
-      console.error('Error saving token', error);
-    }
-  };
 
   const handleOnchange = (text: string, fieldName: string) => {
     setValueLogin({
@@ -42,11 +42,25 @@ const LoginScreens = () => {
   const { data: dataLogin, isPending: isLoading, isError,error } = mutationLogin;
 
   useEffect(() => {
-    if(dataLogin?.status === 200) {
-      saveToken(dataLogin.access_Token);
-      navigation.navigate('TabsBottom')
+    const login = async() => {
+      if(dataLogin?.status === 200) {
+        setValueLogin({
+          email: '',
+          password: '',
+        })
+        dispatch(updateUser({_id: (dataLogin as DataLogin).id, access_Token:(dataLogin as DataLogin).access_Token}))
+        await initializeUser(dispatch, navigation);
+      }
     }
+    login()
   },[dataLogin])
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      await initializeUser(dispatch, navigation);
+    };
+    checkAuth();
+  }, [dispatch, navigation]);
   const submit = () => {
     if ( !valueLogin.email || !valueLogin.password ) {
       Alert.alert('Vui lòng nhập đầy đủ thông tin.');

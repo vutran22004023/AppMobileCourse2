@@ -12,7 +12,11 @@ import CustomButton from '@/components/Button/button'
 import { useSelector } from 'react-redux'
 import { RootState } from "@/redux/store";
 import { useNavigation } from '@react-navigation/native'
+import {resetUser} from '@/redux/Slide/userSlide'
+import { useDispatch } from 'react-redux'
+import {removeToken} from '@/contexts/private'
 const ProfilePage = () => {
+  const dispatch = useDispatch()
   const navigation = useNavigation()
   const [refreshing, setRefreshing] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -37,7 +41,8 @@ const ProfilePage = () => {
   });
 
   const hanleLogout = () => {
-
+    dispatch(resetUser())
+    navigation.navigate('LoginScreens')
   }
 
   const handleUser =() => {

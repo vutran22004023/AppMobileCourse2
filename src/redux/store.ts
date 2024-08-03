@@ -1,6 +1,15 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { persistReducer, persistStore } from 'redux-persist';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import userReducer from './Slide/userSlide'; // Adjust path as necessary
 import timeReducer from './Slide/timeVideoSide'
@@ -22,7 +31,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  blacklist: ['user'], // Blacklist 'user' reducer from being persisted (if needed)
+  blacklist: [], // Blacklist 'user' reducer from being persisted (if needed)
 };
 
 // Create persisted reducer
@@ -34,10 +43,11 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['persist/PERSIST'], // Ignore redux-persist actions
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
 });
 
 // Create persistor
+export type AppDispatch = typeof store.dispatch;
 export const persistor = persistStore(store);
