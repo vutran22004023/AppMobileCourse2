@@ -67,9 +67,11 @@ const HomePages = () => {
       // data={[{id: 1}, {id: 2},{id: 3}, {id: 4}]}
       data={dataAllCourses}
       // data={[]}
-      keyExtractor={(item) => item?.id}
+      keyExtractor={(item) => item?.id?.toString()}
       renderItem={({item, index}) => (
-        <CardCourse course={item} key={index} onPress={() => handleCardPress(item)} />
+        <View >
+          <CardCourse course={item} onPress={() => handleCardPress(item)} />
+        </View>
       )}
       ListHeaderComponent={() => (
         <View className='my-6 px-4  mt-[24px] mb-[24px]'>

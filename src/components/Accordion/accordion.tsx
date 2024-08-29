@@ -20,7 +20,7 @@ const Accordion: React.FC<AccordionProps> = ({ title,children  }) => {
   return (
     <View className='border-2 border-secondary rounded-md mb-2 mt1 h-auto'>
       <TouchableOpacity onPress={toggleExpanded} className="flex-row justify-between p-3 bg-gray-700 w-full ">
-        <Text className='text-2xl font-semibold text-white'>{title}</Text>
+        <Text className='text-ml font-semibold text-white'>{title}</Text>
         <Feather name={isCollapsed ? 'chevron-down' : 'chevron-up'} size={24} color="white" />
       </TouchableOpacity>
       <Collapsible collapsed={isCollapsed} align="center">

@@ -1,7 +1,6 @@
 // playbackSlice.ts
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk } from '@/redux/store';
 import StartCourseServices from '@/services/userCourse';
 
 interface PlaybackState {
@@ -60,13 +59,13 @@ export const startPlayback = (dataVideo: any, user: any, course: any): AppThunk 
   }
 };
 
-export const stopPlayback = (): AppThunk => (dispatch, getState) => {
-  const intervalId = getState().playback.intervalId;
-  if (intervalId) {
-    clearInterval(intervalId);
-    dispatch(setIntervalId(null));
-    dispatch(resetPlaybackTime());
-  }
-};
+// export const stopPlayback = (): AppThunk => (dispatch, getState) => {
+//   const intervalId = getState().playback.intervalId;
+//   if (intervalId) {
+//     clearInterval(intervalId);
+//     dispatch(setIntervalId(null));
+//     dispatch(resetPlaybackTime());
+//   }
+// };
 
 export default playbackSlice.reducer;

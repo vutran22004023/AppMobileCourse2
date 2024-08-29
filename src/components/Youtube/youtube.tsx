@@ -52,7 +52,7 @@ const VideoYoutubeComponent: React.FC<YouTubeComponentProps> = ({ src, style }) 
   return (
     <View style={style}>
       <YoutubePlayer
-        height={250}
+        height={200}
         play={isPlaying}
         videoId={videoId}
         ref={playerRef}

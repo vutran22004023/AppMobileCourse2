@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
-import { url } from './url';
+import axiosInstance from './index'
 
 const StartCourse = async(data: any) => {
     try{
-        const response: AxiosResponse = await axios.post(`${url}/api/user-course/start-course`, data);
+        const response: AxiosResponse = await axiosInstance.post(`user-course/start-course`, data);
         return response.data;
     }catch {
         throw new Error('Error get all courses');
@@ -12,7 +12,7 @@ const StartCourse = async(data: any) => {
 
 const UpdateUserCourse = async(data: any) => {
     try{
-        const response: AxiosResponse = await axios.post(`${url}/api/user-course/update-progress`, data);
+        const response: AxiosResponse = await axiosInstance.post(`user-course/update-progress`, data);
         return response.data;
     }catch {
         throw new Error('Error get all courses');

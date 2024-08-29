@@ -65,7 +65,7 @@ const ProfilePage = () => {
         keyExtractor={(item) => item?.id}
         renderItem={({ item, index }) => <CardCourse course={item} key={index} />}
         ListHeaderComponent={() => (
-          <View className="my-6 mb-[24px]  mt-[24px] px-4">
+          <View className="my-6 px-1">
             <View className="mb-6 flex-row items-start justify-between">
               <View></View>
               <View className="mt-1.5">

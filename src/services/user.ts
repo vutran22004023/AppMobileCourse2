@@ -1,15 +1,10 @@
 import axios,{AxiosResponse} from 'axios';
-import { url } from './url';
+import axiosInstance from './index'
 
-export const GetDetailUser = async (id:any,token: any) => {
+export const GetDetailUser = async (id:any) => {
     try {
-      const response: AxiosResponse = await axios.get(
-        `${url}/api/user/get-detail-user/${id}`,
-        {
-          headers: {
-            token: `Bearer ${token}`,
-          },
-        }
+      const response: AxiosResponse = await axiosInstance.get(
+        `user/get-detail-user/${id}`,
       );
       return response.data;
     } catch {

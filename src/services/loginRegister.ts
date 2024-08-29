@@ -1,10 +1,10 @@
 
 import axios from 'axios';
 import { ILogin, IRegister } from '@/types';
-import { url } from './url';
+import axiosInstance from './index'
 const LoginService = async(data : ILogin)=> {
     try {
-        const res = await axios.post(`${url}/api/login-in`, data)
+        const res = await axiosInstance.post(`login-in`, data)
         return res?.data
     }catch (e) {
         console.log(e);
@@ -13,7 +13,7 @@ const LoginService = async(data : ILogin)=> {
 
 const RegisterService = async(data: IRegister) => {
     try {
-        const res= await axios.post(`${url}/api/register`, data)
+        const res= await axiosInstance.post(`register`, data)
         return res?.data
     }catch (err) {
         console.log(err);

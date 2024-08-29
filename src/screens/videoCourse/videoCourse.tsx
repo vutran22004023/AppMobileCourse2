@@ -16,7 +16,7 @@ import CircularProgress from '@/components/CircularProgress/circularProgress';
 import {formatDate} from '@/libs/utils'
 import StartCourseServices from '@/services/userCourse'
 import { useMutationHook } from '@/hooks';
-import { startPlayback, stopPlayback } from "@/redux/Slide/playbackSlice";
+// import { startPlayback, } from "@/redux/Slide/playbackSlice";
 interface VideoModalComponentProps {
   isVisible: boolean;
   onClose: () => void;
@@ -97,9 +97,9 @@ const VideoCourse = ({course}:VideoCourseProps) => {
 
   useEffect(() => {
     if (timeVideo.isPlaying === true) {
-      dispatch(startPlayback(dataVideo, user, course));
+      // dispatch(startPlayback(dataVideo, user, course));
     } else {
-      dispatch(stopPlayback());
+      // dispatch(stopPlayback());
     }
   }, [timeVideo.isPlaying]);
 
@@ -220,18 +220,18 @@ const VideoCourse = ({course}:VideoCourseProps) => {
         keyExtractor={(item) => item?.id}
         renderItem={({ item, index }) => <></>}
         ListHeaderComponent={() => (
-          <View className="my-6 mb-[24px] mt-[25px] ">
+          <View className="my-6 mb-[24px] mt-[10px] ">
             <WebViewPlayer src={dataVideo?.video} />
             <View className="mx-1 flex-row justify-between">
-              <View className=" mx-2 my-4 w-[80%]">
+              <View className=" mx-2 my-4 w-[70%]">
                 <Text className="font-pmedium text-xl font-extrabold text-white">
                   {dataVideo?.childname}
                 </Text>
                 <View className="mt-2 flex-row gap-3">
-                  <Text className="text-ml font-pmedium font-normal text-white ">
+                  <Text className="text-sm font-pmedium font-normal text-white ">
                     {course?.view} lượt xem
                   </Text>
-                  <Text className="text-ml font-pmedium font-normal text-white ">
+                  <Text className="text-sm font-pmedium font-normal text-white ">
                     Cập nhập: {formatDate(course?.updatedAt)}
                   </Text>
                 </View>
@@ -253,7 +253,7 @@ const VideoCourse = ({course}:VideoCourseProps) => {
                 <TouchableOpacity activeOpacity={0.7} className="items-center justify-center">
                   <Image
                     source={icons.blog}
-                    className="h-10 w-9"
+                    className="h-8 w-8"
                     resizeMode="contain"
                     style={{ tintColor: '#fff' }}
                   />
@@ -262,7 +262,7 @@ const VideoCourse = ({course}:VideoCourseProps) => {
                 <TouchableOpacity activeOpacity={0.7} className="items-center justify-center">
                   <Image
                     source={icons.blogme}
-                    className="h-10 w-10"
+                    className="h-8 w-8"
                     resizeMode="contain"
                     style={{ tintColor: '#fff' }}
                   />
@@ -271,7 +271,7 @@ const VideoCourse = ({course}:VideoCourseProps) => {
                 <TouchableOpacity activeOpacity={0.7} className="items-center justify-center">
                   <Image
                     source={icons.bookmark}
-                    className="h-9 w-9"
+                    className="h-8 w-8"
                     resizeMode="contain"
                     style={{ tintColor: '#fff' }}
                   />
@@ -280,7 +280,7 @@ const VideoCourse = ({course}:VideoCourseProps) => {
               </View>
             </View>
             <View>
-              <Text className="mb-2 text-2xl font-black text-white">Nội dung khóa học</Text>
+              <Text className="mb-2 text-xl font-black text-white">Nội dung khóa học</Text>
               <SafeAreaView>
                 <ScrollView>
                   {mergedChapters?.map((chapter: any, index: number) => (
@@ -301,10 +301,10 @@ const VideoCourse = ({course}:VideoCourseProps) => {
                           }}
                           >
                           <View className="w-[90%]">
-                            <Text className="text-xl font-medium text-white">
+                            <Text className="text-ml font-medium text-white">
                               {video.childname}
                             </Text>
-                            <Text className="text-xl font-medium text-white">{video.time}</Text>
+                            <Text className="text-ml font-medium text-white">{video.time}</Text>
                           </View>
                           <View className="w-[10%] items-center justify-center">
                             {video.status === 'not_started' ? (
