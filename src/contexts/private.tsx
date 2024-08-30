@@ -1,7 +1,7 @@
 
 import { AppDispatch, store } from '@/redux/store';
 import { resetUser, updateUser } from '@/redux/Slide/userSlide';
-import { GetDetailUser } from '@/services/user';
+import { GetDetailUser } from '@/apis/user';
 import {getTokenFrom,setToken , removeToken,isTokenExpired} from '@/Utils/tokenUtils'
 
 export const initializeUser = async (dispatch: AppDispatch,navigation: any) => {

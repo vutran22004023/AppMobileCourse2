@@ -8,17 +8,22 @@ import CoursePage from '@/screens/course';
 import ProfilePage from '@/screens/profile'
 import BlogPage from '@/screens/blog';
 import { useSelector } from 'react-redux'
-import { useNavigation } from '@react-navigation/native';
 import { RootState } from '@/redux/store';
+import useNavigation from '../hooks/useNavigation';
+import {getTokenFrom} from '@/Utils/tokenUtils'
 const Tab = createBottomTabNavigator();
 
 const TabsBottom = () => {
   const navigation = useNavigation()
   const user = useSelector((state: RootState) => state.user);
   useEffect(() => {
-      if (!user?.access_Token && !user?.isAdmin && user?.status !== true) {
-        navigation.navigate('LoginScreens');
+      const checkLogin= async() => {
+        const token = await getTokenFrom();
+        if (!token && !user?.isAdmin && user?.status !== true) {
+          navigation.navigate('LoginScreens');
+        }
       }
+      checkLogin()
   }, []);
   return (
     <Tab.Navigator 
@@ -42,7 +47,7 @@ const TabsBottom = () => {
         options={{
           title: 'Home',
           headerShown: false,
-          tabBarIcon: ({ color, focused, size }) => ( // Chỉnh sửa để trả về một React Node
+          tabBarIcon: ({ color, focused, size }) => ( 
             <TabIcon
               icon={icons.home}
               focused={focused} 
@@ -60,7 +65,7 @@ const TabsBottom = () => {
         options={{
           title: 'Course',
           headerShown: false,
-          tabBarIcon: ({ color, focused, size }) => ( // Chỉnh sửa để trả về một React Node
+          tabBarIcon: ({ color, focused, size }) => (
             <TabIcon
               icon={icons.course}
               focused={focused} 
@@ -78,7 +83,7 @@ const TabsBottom = () => {
         options={{
           title: 'Blog',
           headerShown: false,
-          tabBarIcon: ({ color, focused, size }) => ( // Chỉnh sửa để trả về một React Node
+          tabBarIcon: ({ color, focused, size }) => ( 
             <TabIcon
               icon={icons.blog}
               focused={focused} 
@@ -96,7 +101,7 @@ const TabsBottom = () => {
         options={{
           title: 'Profile',
           headerShown: false,
-          tabBarIcon: ({ color, focused, size }) => ( // Chỉnh sửa để trả về một React Node
+          tabBarIcon: ({ color, focused, size }) => (
             <TabIcon
               icon={icons.profile}
               focused={focused} 

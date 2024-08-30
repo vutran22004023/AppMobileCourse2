@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, View, Image, Text, Alert, TouchableOpacity  } from 'react-native';
-import FormField from '@/components/FormField/formField';
+import FormField from '@/components/Common/FormField/formField';
 import { images } from '@/constants';
-import ButtonComponent from '@/components/Button/button'
-import { useNavigation } from '@react-navigation/native';
+import ButtonComponent from '@/components/Common/Button/button'
 import { useMutationHook } from '@/hooks';
 import { IRegister } from '@/types';
-import { RegisterService } from '@/services/loginRegister';
+import { RegisterService } from '@/apis/loginRegister';
+import useNavigation from '../../../hooks/useNavigation';
 const RegisterScreens = () => {
   const navigation = useNavigation()
   const [valueRegister, setValueRegister] = useState({
@@ -162,7 +162,7 @@ const RegisterScreens = () => {
               Bạn đã có tài khoản ?
             </Text>
             <TouchableOpacity  onPress={() => navigation.navigate('LoginScreens')}>
-              <Text className="text-lg font-semibold text-secondary text-[#fff]">Đăng nhập</Text>
+              <Text className="text-lg font-semibold text-secondary">Đăng nhập</Text>
             </TouchableOpacity>
           </View>
         </View>

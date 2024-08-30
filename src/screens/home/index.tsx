@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Image, StatusBar } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from "react-native-safe-area-context";
 import {images} from '@/constants'
-import ButtonComponment from '@/components/Button/button'
-import { useNavigation } from '@react-navigation/native';
+import ButtonComponment from '@/components/Common/Button/button'
+// import { useNavigation } from '@react-navigation/native';
+import TextThemed from '@/components/Common/TextThemed';
+import useNavigation  from '@/hooks/useNavigation'
 
 const HomeScreens  = () => {
   const navigation = useNavigation();
@@ -30,9 +32,9 @@ const HomeScreens  = () => {
             
           </View>
 
-          <Text className='text-sm font-pregular text-gray-100 mt-7 text-center'>
+          <TextThemed className='text-center'>
             Where Creativity Meets Innovation: Embark on a Journey of Limitless Exploration with Aora
-          </Text>
+          </TextThemed>
 
           <ButtonComponment  
             title="Continue with Email"

@@ -74,9 +74,9 @@ export default function RootStack() {
     if (error) throw error;
     const hideSplash = async () => {
       if (error) throw error;
-      await SplashScreen.preventAutoHideAsync(); // Ngăn chặn tự động ẩn thanh màu trắng
+      await SplashScreen.preventAutoHideAsync(); 
       if (fontsLoaded) {
-        await SplashScreen.hideAsync(); // Ẩn thanh màu trắng khi fonts đã được tải
+        await SplashScreen.hideAsync();
       }
     };
 

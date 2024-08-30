@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { icons, images } from '@/constants';
 import CircularProgress from '@/components/CircularProgress/circularProgressImage';
-import CustomButton from '@/components/Button/button';
+import CustomButton from '@/components/Common/Button/button';
 const CoursePage = () => {
   return (
     <SafeAreaView style={{ backgroundColor: '#161622' }} className="flex-1 border-2 border-red-500">

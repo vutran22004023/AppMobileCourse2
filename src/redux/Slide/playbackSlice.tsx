@@ -1,7 +1,7 @@
 // playbackSlice.ts
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import StartCourseServices from '@/services/userCourse';
+import StartCourseServices from '@/apis/userCourse';
 
 interface PlaybackState {
   playbackTime: number;

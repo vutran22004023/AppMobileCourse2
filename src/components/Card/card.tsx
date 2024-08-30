@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import {icons} from '@/constants'
-const CardCourse = ({course: {name, image, slug,price,totalVideos,totalTime,view,},onPress}: any) => {
+const CardCourse = ({course: {name, image, slug,price,totalVideos,totalTime,view},onPress}: any) => {
   return (
     <TouchableOpacity className='flex-col items-center px-4 mb-14' onPress={onPress} activeOpacity={0.7}>
     <View className='flex-row gap-3 items-start'>

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import CustomButtonIcon from '../Button/buttonIcon'
+import CustomButtonIcon from '@/components/Common/Button/buttonIcon'
 import { icons } from '@/constants'
 import { useNavigation } from '@react-navigation/native'
 

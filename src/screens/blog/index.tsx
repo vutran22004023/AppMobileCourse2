@@ -12,7 +12,8 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CardBlog from '@/components/Card/cardBlog'
 import {blogPosts} from './data';
-import { useNavigation } from '@react-navigation/native'
+// import { useNavigation } from '@react-navigation/native'
+import useNavigation from '../../hooks/useNavigation';
 const BlogPage = () => {
   const navigaion = useNavigation()
   const handleCardBlogPress = (item: any) => {

@@ -1,4 +1,4 @@
-import { useMutation,useQuery, UseQueryOptions  } from '@tanstack/react-query';
+import { useMutation} from '@tanstack/react-query';
 export const useMutationHook = <TData = unknown, TVariables = unknown>(
   fnCallBack: (variables: TVariables) => Promise<TData>
 ) => {

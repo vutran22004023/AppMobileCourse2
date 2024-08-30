@@ -2,19 +2,20 @@ import { FlatList, Image, RefreshControl, StyleSheet, Text, View,TouchableOpacit
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {images, icons}from '@/constants'
-import InfoBox from '@/components/InforBox/InfoBox'
+import InfoBox from '@/components/Common/InforBox/InfoBox'
 import Trending from '@/components/Trending/trending'
-import EmptyState from '@/components/EmptyState/emptyState'
-import {GetAllCourses} from '@/services/course'
+import EmptyState from '@/components/Common/EmptyState/emptyState'
+import {GetAllCourses} from '@/apis/course'
 import { useQuery } from "@tanstack/react-query";
 import CardCourse from '@/components/Card/card'
-import CustomButton from '@/components/Button/button'
+import CustomButton from '@/components/Common/Button/button'
 import { useSelector } from 'react-redux'
 import { RootState } from "@/redux/store";
-import { useNavigation } from '@react-navigation/native'
+// import { useNavigation } from '@react-navigation/native'
 import {resetUser} from '@/redux/Slide/userSlide'
 import { useDispatch } from 'react-redux'
-import {removeToken} from '@/contexts/private'
+import {removeToken} from '@/Utils/tokenUtils'
+import useNavigation from '../../hooks/useNavigation'
 const ProfilePage = () => {
   const dispatch = useDispatch()
   const navigation = useNavigation()

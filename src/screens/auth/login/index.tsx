@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, View, Image, Text, Alert, TouchableOpacity } from 'react-native';
-import FormField from '@/components/FormField/formField';
+import FormField from '@/components/Common/FormField/formField';
 import { images } from '@/constants';
-import ButtonComponent from '@/components/Button/button';
-import { useNavigation } from '@react-navigation/native';
-import {LoginService} from '@/services/loginRegister'
+import ButtonComponent from '@/components/Common/Button/button';
+import {LoginService} from '@/apis/loginRegister'
 import { useMutationHook } from '@/hooks';
 import { ILogin } from '@/types';
 import { useDispatch,useSelector } from 'react-redux';
 import {updateUser} from '@/redux/Slide/userSlide'
 import { store, persistor,AppDispatch, RootState  } from "@/redux/store";
 import { initializeUser } from '@/contexts/private';
+import TextThemed from '@/components/Common/TextThemed';
+import useNavigation from '@/hooks/useNavigation'
 type DataLogin = {
   status?: any;
   access_Token?: string;
@@ -69,7 +70,7 @@ const LoginScreens = () => {
     mutationLogin.mutate(valueLogin);
   };
 
-  const isButtonDisabled = !valueLogin.email || !valueLogin.password
+  // const isButtonDisabled = !valueLogin.email || !valueLogin.password
   return (
     <SafeAreaView style={{ backgroundColor: '#161622', height: '100%' }}>
       <ScrollView>
@@ -111,13 +112,13 @@ const LoginScreens = () => {
             title="Đăng nhập"
             handlePress={submit}
             containerStyles={`mt-7`}
-            isLoading={isLoading || isButtonDisabled}
+            isLoading={isLoading}
           />
 
           <View className="flex-row justify-center gap-2 pt-5">
             <Text className="text-lg text-gray-100">Bạn chưa có tài khoản ?</Text>
             <TouchableOpacity onPress={() => navigation.navigate('RegisterScreens')}>
-              <Text className="text-lg font-semibold text-secondary">Đăng kí</Text>
+              <TextThemed type="subtitle" className="text-secondary">Đăng kí</TextThemed>
             </TouchableOpacity>
           </View>
         </View>

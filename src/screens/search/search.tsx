@@ -6,11 +6,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import {images, icons}from '@/constants'
 import SearchInput from '@/components/SearchInput/searchInput'
 import Trending from '@/components/Trending/trending'
-import EmptyState from '@/components/EmptyState/emptyState'
-import {GetSearchCourses} from '@/services/course'
+import EmptyState from '@/components/Common/EmptyState/emptyState'
+import {GetSearchCourses} from '@/apis/course'
 import { useQuery } from "@tanstack/react-query";
 import CardCourse from '@/components/Card/card'
-import CustomButtonIcon from '@/components/Button/buttonIcon';
+import CustomButtonIcon from '@/components/Common/Button/buttonIcon';
 import { useNavigation } from '@react-navigation/native';
 import { useMutationHook } from '@/hooks';
 const SearchScreen = () => {

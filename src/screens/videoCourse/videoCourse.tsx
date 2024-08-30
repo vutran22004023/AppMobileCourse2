@@ -3,18 +3,18 @@ import { FlatList, Image, RefreshControl, StyleSheet, Text, TouchableOpacity, Vi
 import React, { useEffect, useRef, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images, icons } from '@/constants';
-import EmptyState from '@/components/EmptyState/emptyState';
+import EmptyState from '@/components/Common/EmptyState/emptyState';
 import { useQuery } from '@tanstack/react-query';
 import CardCourse from '@/components/Card/card';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import WebViewPlayer from '@/components/Youtube/youtube';
+import WebViewPlayer from '@/components/Common/Youtube/youtube';
 import Accordion from '@/components/Accordion/accordion';
 import { ScrollView } from 'react-native-gesture-handler';
 import CircularProgress from '@/components/CircularProgress/circularProgress';
 import {formatDate} from '@/libs/utils'
-import StartCourseServices from '@/services/userCourse'
+import StartCourseServices from '@/apis/userCourse'
 import { useMutationHook } from '@/hooks';
 // import { startPlayback, } from "@/redux/Slide/playbackSlice";
 interface VideoModalComponentProps {

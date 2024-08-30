@@ -1,13 +1,13 @@
 import { FlatList, Image, RefreshControl, StyleSheet, Text, TouchableOpacity, View,ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import CustomButtonIcon from '@/components/Button/buttonIcon'
+import CustomButtonIcon from '@/components/Common/Button/buttonIcon'
 import { useNavigation } from '@react-navigation/native'
 import { icons } from '@/constants'
-import ComeBack from '@/components/Comback/comeBack'
-import ModalComponent from '@/components/Modal/modal'
-import FormField from '@/components/FormField/formField'
-import ButtonComponent from '@/components/Button/button'
+import ComeBack from '@/components/Common/Comback/comeBack'
+import ModalComponent from '@/components/Common/Modal/modal'
+import FormField from '@/components/Common/FormField/formField'
+import ButtonComponent from '@/components/Common/Button/button'
 const Setting = () => {
     const navigation =  useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
