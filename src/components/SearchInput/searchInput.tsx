@@ -2,8 +2,9 @@ import React,{useEffect, useState} from 'react'
 import {icons} from '@/constants'
 import { Image, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import useNavigation from '../../hooks/useNavigation';
 interface IProps {
     title: string;
     value: string |undefined;

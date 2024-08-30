@@ -5,8 +5,9 @@ export type RootStackParamList = {
     LoginScreens: undefined;
     RegisterScreens: undefined;
     VideoCourse: undefined;
-    BlogDetailScreen: { blogDetail: any };
     SettingScreen: undefined;
+    BlogDetailScreen: { blogDetail: any };
+    SearchScreen: {search: any};
   };
   
   export type NavigationProps<T extends keyof RootStackParamList> = {
