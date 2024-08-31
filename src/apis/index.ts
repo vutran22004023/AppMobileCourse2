@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { getTokenFrom } from '@/Utils/tokenUtils';
 const axiosInstance: AxiosInstance = axios.create({
-    baseURL: 'http://192.168.1.20:3002/api/',
+    baseURL: 'http://192.168.1.10:3002/api/',
     timeout: 5000
 });
 
@@ -12,7 +12,7 @@ axiosInstance.interceptors.request.use(
       if (tokenCookies) {
         config.headers.token = `Bearer ${tokenCookies}`;
       }else {
-        console.log('loi')
+        console.log('Token không có')
       }
 
       return config;

@@ -2,7 +2,11 @@ import React,{useState} from 'react'
 import {icons} from '@/constants'
 import { Image, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import TextThemed from '../TextThemed';
+import { useThemeColor } from '@/hooks/useThemeColor';
 interface IProps {
+    lightColor?: string;
+    darkColor?: string;
     title: string;
     value: string |undefined;
     placeholder: string;
@@ -11,17 +15,21 @@ interface IProps {
     [key: string]: any; // Để chấp nhận các thuộc tính khác nếu cần
   }
 
-  const FormField: React.FC<IProps> = ({ title, value, placeholder, handleChangeText, otherStyles, ...props }) => {
+  const FormField: React.FC<IProps> = ({ title, value, placeholder, handleChangeText, otherStyles,lightColor,darkColor, ...props }) => {
+    const bg = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+    const border = useThemeColor({ light: lightColor, dark: darkColor }, 'border');
+    const text = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
     const [isFocused, setIsFocused] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   
     return (
       <View className={`space-y-1 ${otherStyles}`}>
-        <Text className='text-base text-gray-100 font-pmedium mb-2'>{title}</Text>
-        <View className={`w-full h-14 px-4 bg-black-100 rounded-2xl flex-row items-center border-2 ${isFocused ? 'border-orange-400' : 'border-yellow-50'}`}>
+        <TextThemed className='mb-2'>{title}</TextThemed>
+        <View className={`w-full h-14 px-4 ${bg} rounded-2xl flex-row items-center border-2 ${isFocused ? 'border-orange-400' : border}`}>
           <TextInput
-            className='flex-1 text-white font-psemibold text-base'
+            className={` flex-1 font-psemibold text-base`}
+            style={{color: text}}
             value={value}
             placeholder={placeholder}
             placeholderTextColor="#7b7b8b"

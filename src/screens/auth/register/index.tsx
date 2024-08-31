@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView, View, Image, Text, Alert, TouchableOpacity  } from 'react-native';
+import { ScrollView, View, Image, Text, Alert, TouchableOpacity } from 'react-native';
 import FormField from '@/components/Common/FormField/formField';
 import { images } from '@/constants';
-import ButtonComponent from '@/components/Common/Button/button'
+import ButtonComponent from '@/components/Common/Button/button';
 import { useMutationHook } from '@/hooks';
 import { IRegister } from '@/types';
 import { RegisterService } from '@/apis/loginRegister';
 import useNavigation from '../../../hooks/useNavigation';
+import { ThemedView } from '@/components/Common/ViewThemed';
 const RegisterScreens = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [valueRegister, setValueRegister] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   const handleOnchange = (text: string, fieldName: string) => {
@@ -24,8 +25,8 @@ const RegisterScreens = () => {
     });
   };
 
-   // Function to check if the input is a valid email format
-   const isValidEmail = (email: string): boolean => {
+  // Function to check if the input is a valid email format
+  const isValidEmail = (email: string): boolean => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
@@ -41,29 +42,31 @@ const RegisterScreens = () => {
     return password === confirmPassword;
   };
 
-
   const mutationRegister = useMutationHook(async (data: IRegister) => {
     const res = await RegisterService(data);
     return res;
   });
 
-  const { data: dataRegister, isPending: isLoading, isError,error } = mutationRegister;
+  const { data: dataRegister, isPending: isLoading, isError, error } = mutationRegister;
 
   useEffect(() => {
-    if(dataRegister?.status === 200) {
+    if (dataRegister?.status === 200) {
       setValueRegister({
         name: '',
         email: '',
         password: '',
-        confirmPassword: ''
-      })
+        confirmPassword: '',
+      });
     }
-  },[dataRegister])
-
+  }, [dataRegister]);
 
   const submit = () => {
-
-    if (!valueRegister.name || !valueRegister.email || !valueRegister.password || !valueRegister.confirmPassword) {
+    if (
+      !valueRegister.name ||
+      !valueRegister.email ||
+      !valueRegister.password ||
+      !valueRegister.confirmPassword
+    ) {
       Alert.alert('Vui lòng nhập đầy đủ thông tin.');
       return;
     }
@@ -74,7 +77,9 @@ const RegisterScreens = () => {
     }
 
     if (!isValidPassword(valueRegister.password)) {
-      Alert.alert('Mật khẩu không hợp lệ. Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất một ký tự đặc biệt và một ký tự viết hoa.');
+      Alert.alert(
+        'Mật khẩu không hợp lệ. Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất một ký tự đặc biệt và một ký tự viết hoa.'
+      );
       return;
     }
 
@@ -85,16 +90,16 @@ const RegisterScreens = () => {
     mutationRegister.mutate(valueRegister);
   };
 
-  const isButtonDisabled = !valueRegister.name ||
-  !valueRegister.email ||
-  !valueRegister.password ||
-  !valueRegister.confirmPassword ||
-  !isValidEmail(valueRegister.email) ||
-  !isValidPassword(valueRegister.password) ||
-  !passwordsMatch(valueRegister.password, valueRegister.confirmPassword);
+  // const isButtonDisabled = !valueRegister.name ||
+  // !valueRegister.email ||
+  // !valueRegister.password ||
+  // !valueRegister.confirmPassword ||
+  // !isValidEmail(valueRegister.email) ||
+  // !isValidPassword(valueRegister.password) ||
+  // !passwordsMatch(valueRegister.password, valueRegister.confirmPassword);
 
   return (
-    <SafeAreaView style={{ backgroundColor: '#161622', height: '100%' }}>
+    <ThemedView>
       <ScrollView>
         <View className="my-6 min-h-[85vh] w-full justify-center px-4">
           <Image source={images.logo} resizeMode="contain" className="h-[84px] w-[130px]" />
@@ -139,36 +144,30 @@ const RegisterScreens = () => {
             placeholder=""
           />
 
-              {dataRegister?.status === 'ERR' && (
-                <Text className='text-[#aa232a] mt-3 text-base'>
-                  {dataRegister?.message}
-                </Text>
-              )}
-              {dataRegister?.status === 200 && (
-                <Text className='text-[#3df033] mt-3 text-base'>
-                  {dataRegister?.message}
-                </Text>
-              )}
+          {dataRegister?.status === 'ERR' && (
+            <Text className="mt-3 text-base text-[#aa232a]">{dataRegister?.message}</Text>
+          )}
+          {dataRegister?.status === 200 && (
+            <Text className="mt-3 text-base text-[#3df033]">{dataRegister?.message}</Text>
+          )}
 
           <ButtonComponent
             title="Đăng kí"
             handlePress={submit}
             containerStyles={`mt-7`}
-            isLoading={isLoading || isButtonDisabled }
+            isLoading={isLoading}
           />
 
-          <View className='justify-center pt-5 flex-row gap-2'>
-            <Text className='text-lg text-gray-100'>
-              Bạn đã có tài khoản ?
-            </Text>
-            <TouchableOpacity  onPress={() => navigation.navigate('LoginScreens')}>
+          <View className="flex-row justify-center gap-2 pt-5">
+            <Text className="text-lg text-gray-100">Bạn đã có tài khoản ?</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('LoginScreens')}>
               <Text className="text-lg font-semibold text-secondary">Đăng nhập</Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </ThemedView>
   );
-}
+};
 
-export default RegisterScreens
+export default RegisterScreens;

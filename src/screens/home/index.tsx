@@ -1,57 +1,46 @@
-import { StyleSheet, Text, View, ScrollView, Image, StatusBar } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from "react-native-safe-area-context";
-import {images} from '@/constants'
-import ButtonComponment from '@/components/Common/Button/button'
+import { StyleSheet, Text, View, ScrollView, Image, StatusBar } from 'react-native';
+import React from 'react';
+import { images } from '@/constants';
+import ButtonComponment from '@/components/Common/Button/button';
 // import { useNavigation } from '@react-navigation/native';
 import TextThemed from '@/components/Common/TextThemed';
-import useNavigation  from '@/hooks/useNavigation'
+import useNavigation from '@/hooks/useNavigation';
+import { ThemedView } from '@/components/Common/ViewThemed';
 
-const HomeScreens  = () => {
+const HomeScreens = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={{backgroundColor:'#161622', height:'100%'}}>
-      <ScrollView >
-        <View className='w-full items-center h-full px-4 justify-center'>
-        <Image
-            source={images.logo}
-            className='w-[130px] h-[84px]'
-            resizeMode="contain"
-          />
+    <ThemedView style={{ alignItems: 'center' }}>
+      <ScrollView>
+        <View className="h-full w-full items-center justify-center px-4">
+          <Image source={images.logo} className="h-[84px] w-[130px]" resizeMode="contain" />
           <Image
             source={images.cards}
-            className='max-w-[380px] w-full h-[300px]'
+            className="h-[300px] w-full max-w-[380px]"
             resizeMode="contain"
           />
           <View>
-          <Text className='text-3xl text-white text-center font-bold'>
-              Discover Endless Possibilities with{" "}
-              <Text className='text-[#eec10c]'>Aora</Text>
-            </Text>
-            
+            <TextThemed type="header" className="text-center">
+              Discover Endless Possibilities with <Text className="text-[#eec10c]">Aora</Text>
+            </TextThemed>
           </View>
 
-          <TextThemed className='text-center'>
-            Where Creativity Meets Innovation: Embark on a Journey of Limitless Exploration with Aora
+          <TextThemed className="text-center">
+            Where Creativity Meets Innovation: Embark on a Journey of Limitless Exploration with
+            Aora
           </TextThemed>
 
-          <ButtonComponment  
+          <ButtonComponment
             title="Continue with Email"
             handlePress={() => navigation.navigate('LoginScreens')}
             textStyles=""
             containerStyles="w-full mt-7"
           />
-          <ButtonComponment  
-            title="Continue with Email"
-            handlePress={() => navigation.navigate('VideoCourse')}
-            textStyles=""
-            containerStyles="w-full mt-7"
-          />
         </View>
       </ScrollView>
-    </SafeAreaView>
-  )
-}
+    </ThemedView>
+  );
+};
 
-export default HomeScreens 
+export default HomeScreens;

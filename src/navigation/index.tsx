@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import {useColorScheme  } from 'react-native';
 import { NavigationContainer,DefaultTheme, useNavigation  } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider,useDispatch, useSelector } from "react-redux";
@@ -17,7 +17,8 @@ import TabsBottom from '@/navigation/TabsBottom';
 import SearchScreen from '@/screens/search/search';
 import SettingScreen from '@/screens/setting';
 import BlogDetailScreen from '@/screens/blogDetail';
-import {initializeUser} from '@/contexts/private'
+import {initializeUser} from '@/contexts/private';
+import { Colors } from '@/constants/Colors';
 SplashScreen.preventAutoHideAsync();
 export type RootStackParamList = {
   Overview: undefined;
@@ -32,15 +33,6 @@ export type RootStackParamList = {
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
-
-
-const customTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: '#161622', // Set your desired background color
-  },
-};
 
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -57,6 +49,18 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
 export default function RootStack() {
   const queryClient = new QueryClient();
+  const scheme = useColorScheme();
+
+  const customTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: scheme === 'dark' ? Colors.dark.background : Colors.light.background,
+      text: scheme === 'dark' ? Colors.dark.text : Colors.light.text,
+      tint: scheme === 'dark' ? Colors.dark.tint : Colors.light.tint,
+      icon: scheme === 'dark' ? Colors.dark.icon : Colors.light.icon,
+    },
+  };
 
   const [fontsLoaded, error] = useFonts({
     'Poppins-Black': require('../assets/fonts/Poppins-Black.ttf'),

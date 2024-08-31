@@ -4,19 +4,20 @@ import { ScrollView, View, Image, Text, Alert, TouchableOpacity } from 'react-na
 import FormField from '@/components/Common/FormField/formField';
 import { images } from '@/constants';
 import ButtonComponent from '@/components/Common/Button/button';
-import {LoginService} from '@/apis/loginRegister'
+import { LoginService } from '@/apis/loginRegister';
 import { useMutationHook } from '@/hooks';
 import { ILogin } from '@/types';
-import { useDispatch,useSelector } from 'react-redux';
-import {updateUser} from '@/redux/Slide/userSlide'
-import { store, persistor,AppDispatch, RootState  } from "@/redux/store";
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from '@/redux/Slide/userSlide';
+import { store, persistor, AppDispatch, RootState } from '@/redux/store';
 import { initializeUser } from '@/contexts/private';
 import TextThemed from '@/components/Common/TextThemed';
-import useNavigation from '@/hooks/useNavigation'
+import useNavigation from '@/hooks/useNavigation';
+import { ThemedView } from '@/components/Common/ViewThemed';
 type DataLogin = {
   status?: any;
   access_Token?: string;
-  message?: string,
+  message?: string;
   id?: string;
 };
 const LoginScreens = () => {
@@ -26,7 +27,6 @@ const LoginScreens = () => {
     email: '',
     password: '',
   });
-
 
   const handleOnchange = (text: string, fieldName: string) => {
     setValueLogin({
@@ -40,21 +40,26 @@ const LoginScreens = () => {
     return res;
   });
 
-  const { data: dataLogin, isPending: isLoading, isError,error } = mutationLogin;
+  const { data: dataLogin, isPending: isLoading, isError, error } = mutationLogin;
 
   useEffect(() => {
-    const login = async() => {
-      if(dataLogin?.status === 200) {
+    const login = async () => {
+      if (dataLogin?.status === 200) {
         setValueLogin({
           email: '',
           password: '',
-        })
-        dispatch(updateUser({_id: (dataLogin as DataLogin).id, access_Token:(dataLogin as DataLogin).access_Token}))
+        });
+        dispatch(
+          updateUser({
+            _id: (dataLogin as DataLogin).id,
+            access_Token: (dataLogin as DataLogin).access_Token,
+          })
+        );
         await initializeUser(dispatch, navigation);
       }
-    }
-    login()
-  },[dataLogin])
+    };
+    login();
+  }, [dataLogin]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -63,7 +68,7 @@ const LoginScreens = () => {
     checkAuth();
   }, [dispatch, navigation]);
   const submit = () => {
-    if ( !valueLogin.email || !valueLogin.password ) {
+    if (!valueLogin.email || !valueLogin.password) {
       Alert.alert('Vui lòng nhập đầy đủ thông tin.');
       return;
     }
@@ -72,11 +77,11 @@ const LoginScreens = () => {
 
   // const isButtonDisabled = !valueLogin.email || !valueLogin.password
   return (
-    <SafeAreaView style={{ backgroundColor: '#161622', height: '100%' }}>
+    <ThemedView>
       <ScrollView>
         <View className="my-6 min-h-[85vh] w-full justify-center px-4">
           <Image source={images.logo} resizeMode="contain" className="h-[84px] w-[130px]" />
-          <Text className="text-2xl font-semibold text-white"> Đăng nhập</Text>
+          <TextThemed type="title"> Đăng nhập</TextThemed>
 
           <FormField
             title="Email"
@@ -97,16 +102,6 @@ const LoginScreens = () => {
             keyboardType="default"
             placeholder=""
           />
-                    {dataLogin?.status === 'ERR' && (
-            <Text className='text-[#aa232a] mt-3 text-base'>
-              {dataLogin?.message}
-            </Text>
-          )}
-          {dataLogin?.status === 200 && (
-            <Text className='text-[#3df033] mt-3 text-base'>
-              {dataLogin?.message}
-            </Text>
-          )}
 
           <ButtonComponent
             title="Đăng nhập"
@@ -116,14 +111,16 @@ const LoginScreens = () => {
           />
 
           <View className="flex-row justify-center gap-2 pt-5">
-            <Text className="text-lg text-gray-100">Bạn chưa có tài khoản ?</Text>
+            <TextThemed type="subtitle">Bạn chưa có tài khoản ?</TextThemed>
             <TouchableOpacity onPress={() => navigation.navigate('RegisterScreens')}>
-              <TextThemed type="subtitle" className="text-secondary">Đăng kí</TextThemed>
+              <Text className="text-secondary text-lg font-bold font-pregular">
+                Đăng kí
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </ThemedView>
   );
 };
 

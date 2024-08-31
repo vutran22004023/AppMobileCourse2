@@ -1,66 +1,79 @@
-import { FlatList, Image, RefreshControl, StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import {images, icons}from '@/constants'
-import InfoBox from '@/components/Common/InforBox/InfoBox'
-import Trending from '@/components/Trending/trending'
-import EmptyState from '@/components/Common/EmptyState/emptyState'
-import {GetAllCourses} from '@/apis/course'
-import { useQuery } from "@tanstack/react-query";
-import CardCourse from '@/components/Card/card'
-import CustomButton from '@/components/Common/Button/button'
-import { useSelector } from 'react-redux'
-import { RootState } from "@/redux/store";
+import {
+  FlatList,
+  Image,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { images, icons } from '@/constants';
+import InfoBox from '@/components/Common/InforBox/InfoBox';
+import Trending from '@/components/Trending/trending';
+import EmptyState from '@/components/Common/EmptyState/emptyState';
+import { GetAllCourses } from '@/apis/course';
+import { useQuery } from '@tanstack/react-query';
+import CardCourse from '@/components/Card/card';
+import CustomButton from '@/components/Common/Button/button';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 // import { useNavigation } from '@react-navigation/native'
-import {resetUser} from '@/redux/Slide/userSlide'
-import { useDispatch } from 'react-redux'
-import {removeToken} from '@/Utils/tokenUtils'
-import useNavigation from '../../hooks/useNavigation'
+import { resetUser } from '@/redux/Slide/userSlide';
+import { useDispatch } from 'react-redux';
+import { removeToken } from '@/Utils/tokenUtils';
+import useNavigation from '../../hooks/useNavigation';
+import {ThemedView} from '@/components/Common/ViewThemed'
+import TextThemed from '@/components/Common/TextThemed';
+import { useThemeColor } from '@/hooks/useThemeColor';
+
+const BG_LIGHT= "bg-[#f3f3f3]";
+const BG_DARK="bg-black-200"
 const ProfilePage = () => {
-  const dispatch = useDispatch()
-  const navigation = useNavigation()
-  const [refreshing, setRefreshing] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+  const bg = useThemeColor({ light: BG_LIGHT , dark: BG_DARK }, 'background');
+  const tinsIcon = useThemeColor({ light: '' , dark: '' }, 'tint');
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const [refreshing, setRefreshing] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((state: RootState) => state.user);
   const onRefresh = async () => {
-    setRefreshing(true)
-    refreshAllCourse()
-    setRefreshing(false)
-  }
-  const refreshAllCourse = async() => {
+    setRefreshing(true);
+    refreshAllCourse();
+    setRefreshing(false);
+  };
+  const refreshAllCourse = async () => {
     try {
-      const res = await GetAllCourses()
-      return res?.data
-    }catch(e) {
-      console.log(e)
+      const res = await GetAllCourses();
+      return res?.data;
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const { data: dataAllCourses, isPending: __isPendingState } = useQuery({
-    queryKey: ["dataLUserCouse"],
+    queryKey: ['dataLUserCouse'],
     queryFn: refreshAllCourse,
   });
 
   const hanleLogout = () => {
-    dispatch(resetUser())
-    navigation.navigate('LoginScreens')
-  }
+    dispatch(resetUser());
+    navigation.navigate('LoginScreens');
+  };
 
-  const handleUser =() => {
+  const handleUser = () => {};
 
-  }
+  const handleOpenProfile = () => {
+    setIsOpen(false);
+  };
 
-  const handleOpenProfile =() => {
-    setIsOpen(false)
-  }
-
-  const handleOpenCourseMe =() => {
-    setIsOpen(true)
-  }
-
+  const handleOpenCourseMe = () => {
+    setIsOpen(true);
+  };
 
   return (
-    <SafeAreaView style={{ backgroundColor: '#161622' }} className="flex-1 border-2 border-red-500">
+    <ThemedView>
       <FlatList
         data={[]}
         keyExtractor={(item) => item?.id}
@@ -101,53 +114,72 @@ const ProfilePage = () => {
 
               <View className="mx-1 mb-5 mt-5 flex-row gap-2">
                 <TouchableOpacity
-                  className={`w-[50%] items-center justify-center rounded-md pb-4 pt-4 ${isOpen === false ? 'bg-secondary' : 'bg-black-200'}`}
+                  className={`w-[50%] items-center justify-center rounded-md pb-4 pt-4 ${isOpen === false ? 'bg-secondary' : bg}`}
                   activeOpacity={0.7}
                   onPress={handleOpenProfile}>
-                  <Text className="text-white">Profile</Text>
+                  <TextThemed >Profile</TextThemed>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  className={`w-[50%] items-center justify-center rounded-md  pb-4 pt-4 ${isOpen === true ? 'bg-secondary' : 'bg-black-200'}`}
+                  className={`w-[50%] items-center justify-center rounded-md  pb-4 pt-4 ${isOpen === true ? 'bg-secondary' : bg}`}
                   activeOpacity={0.7}
                   onPress={handleOpenCourseMe}>
-                  <Text className="text-white">Khóa học của tôi</Text>
+                  <TextThemed >Khóa học của tôi</TextThemed>
                 </TouchableOpacity>
               </View>
 
               {isOpen === false ? (
                 <View className=" w-full">
                   <TouchableOpacity
-                    className={`mb-3 w-full items-center justify-center rounded-lg  bg-black-200 pb-4 pt-4`} 
+                    className={`mb-3 w-full items-center justify-center rounded-lg  ${bg} pb-4 pt-4`}
                     activeOpacity={0.7}>
-                    <Image source={icons.blogwrite} className='w-7 h-7 absolute left-6' style={{tintColor: '#fff'}}/>
-                    <Text className="text-white">Viết blog</Text>
+                    <Image
+                      source={icons.blogwrite}
+                      className="absolute left-6 h-7 w-7"
+                      style={{ tintColor: tinsIcon }}
+                    />
+                    <TextThemed >Viết blog</TextThemed>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    className={`mb-3 w-full items-center justify-center rounded-lg  bg-black-200 pb-4 pt-4`}
+                    className={`mb-3 w-full items-center justify-center rounded-lg  ${bg} pb-4 pt-4`}
                     activeOpacity={0.7}>
-                      <Image source={icons.blogsave} className='w-7 h-7 absolute left-6' style={{tintColor: '#fff'}}/>
-                    <Text className="text-white">Bài viết đã lưu</Text>
+                    <Image
+                      source={icons.blogsave}
+                      className="absolute left-6 h-7 w-7"
+                      style={{ tintColor: tinsIcon }}
+                    />
+                    <TextThemed>Bài viết đã lưu</TextThemed>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    className={`mb-3 w-full items-center justify-center rounded-lg  bg-black-200 pb-4 pt-4`}
+                    className={`mb-3 w-full items-center justify-center rounded-lg  ${bg} pb-4 pt-4`}
                     activeOpacity={0.7}>
-                      <Image source={icons.blogme} className='w-7 h-7 absolute left-6' style={{tintColor: '#fff'}}/>
-                    <Text className="text-white">Khóa học của tôi</Text>
+                    <Image
+                      source={icons.blogme}
+                      className="absolute left-6 h-7 w-7"
+                      style={{ tintColor: tinsIcon }}
+                    />
+                    <TextThemed >Khóa học của tôi</TextThemed>
                   </TouchableOpacity>
                   <View className="mt-4">
                     <TouchableOpacity
-                      className={`mb-3 w-full items-center justify-center rounded-lg  bg-black-200 pb-4 pt-4`}
+                      className={`mb-3 w-full items-center justify-center rounded-lg  ${bg} pb-4 pt-4`}
                       activeOpacity={0.7}>
-                        <Image source={icons.filekey} className='w-7 h-7 absolute left-6' style={{tintColor: '#fff'}}/>
-                      <Text className="text-white">Thông tin trang web</Text>
+                      <Image
+                        source={icons.filekey}
+                        className="absolute left-6 h-7 w-7"
+                        style={{ tintColor: tinsIcon }}
+                      />
+                      <TextThemed >Thông tin trang web</TextThemed>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      className={`mb-3 w-full items-center justify-center rounded-lg  bg-black-200 pb-4 pt-4`}
+                      className={`mb-3 w-full items-center justify-center rounded-lg  ${bg} pb-4 pt-4`}
                       activeOpacity={0.7}
-                      onPress={()=>  navigation.navigate('SettingScreen')}
-                      >
-                        <Image source={icons.setting} className='w-7 h-7 absolute left-6' style={{tintColor: '#fff'}}/>
-                      <Text className="text-white">Cài đặt</Text>
+                      onPress={() => navigation.navigate('SettingScreen')}>
+                      <Image
+                        source={icons.setting}
+                        className="absolute left-6 h-7 w-7"
+                        style={{ tintColor: tinsIcon }}
+                      />
+                      <TextThemed >Cài đặt</TextThemed>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -172,10 +204,10 @@ const ProfilePage = () => {
           </View>
         )}
       />
-    </SafeAreaView>
+    </ThemedView>
   );
-}
+};
 
-export default ProfilePage
+export default ProfilePage;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

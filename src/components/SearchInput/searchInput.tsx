@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 // import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import useNavigation from '../../hooks/useNavigation';
+import { useThemeColor } from '@/hooks/useThemeColor';
 interface IProps {
     title: string;
     value: string |undefined;
@@ -14,7 +15,12 @@ interface IProps {
     [key: string]: any; // Để chấp nhận các thuộc tính khác nếu cần
   }
 
-  const SearchInput: React.FC<any> = ({  ...props }) => {
+
+  const SearchInput: React.FC<any> = ({  ...props }, lightColor?: string,darkColor?: string) => {
+    const bg = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+    const border = useThemeColor({ light: lightColor, dark: darkColor }, 'border');
+    const text = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+    const tintIcon = useThemeColor({ light: lightColor, dark: darkColor }, 'tint');
     const {initsearch} =props
     const navigation = useNavigation();
     const [isFocused, setIsFocused] = useState(false);
@@ -24,9 +30,10 @@ interface IProps {
     },[initsearch])
     return (
 
-        <View className={`w-full h-16 px-4 bg-black-100 rounded-2xl flex-row items-center border-2 space-x-4 ${isFocused ? 'border-orange-400' : 'border-black-100'}`}>
+        <View className={`w-full h-16 px-4 rounded-2xl flex-row items-center border-2 space-x-4 ${isFocused ? 'border-orange-400' : border}`} style={{backgroundColor: bg }}>
           <TextInput
-            className='text-base mt-0.5 text-white flex-1 font-pregular'
+            className={`'text-base mt-0.5 flex-1 font-pregular'`}
+            style={{color: text}}
             value={query}
             placeholder="Tìm kiếm khóa học"
             placeholderTextColor="#7b7b8b"
@@ -45,7 +52,7 @@ interface IProps {
               });
               }
             }}>
-                <Image source={icons.search} className='w-5 h-5' resizeMode='contain'/>
+                <Image source={icons.search} className='w-5 h-5' style={{tintColor: tintIcon}} resizeMode='contain'/>
             </TouchableOpacity>
         </View>
     );

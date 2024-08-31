@@ -24,7 +24,7 @@ const TextThemed = ({
   style,
   ...rest
 }: Prop) => {
-  // const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
   const baseClass = "font-pregular";
   const typeClasses = {
     default: "text-sm font-pregular text-gray-100",
@@ -37,7 +37,7 @@ const TextThemed = ({
   };
   const finalClassName = `${baseClass} ${typeClasses[type]} ${className || ""}`;
   return (
-    <Text className={finalClassName.trim()} {...rest} style={[style]}>
+    <Text className={finalClassName.trim()} {...rest} style={[{color},style]}>
       {children}
     </Text>
   )

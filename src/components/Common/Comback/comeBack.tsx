@@ -3,6 +3,7 @@ import React from 'react'
 import CustomButtonIcon from '@/components/Common/Button/buttonIcon'
 import { icons } from '@/constants'
 import { useNavigation } from '@react-navigation/native'
+import TextThemed from '../TextThemed'
 
 interface Props {
     name: string
@@ -14,7 +15,7 @@ const ComeBack = ({name}: Props) => {
     <View className=' flex-row mb-6 px-4 gap-5 items-center'>
         <CustomButtonIcon icon={icons.left} handlePress={() => navigation.goBack()}/>
         <View className='mr-3'>
-            <Text className='font-pmedium text-xl text-gray-100 text-right'>{name}</Text>
+            <TextThemed type="subtitle">{name}</TextThemed>
         </View>
     </View>
     <View className='w-full h-[1px] bg-orange-400'></View>

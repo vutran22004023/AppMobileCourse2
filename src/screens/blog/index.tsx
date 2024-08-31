@@ -9,46 +9,47 @@ import {
   View,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import CardBlog from '@/components/Card/cardBlog'
-import {blogPosts} from './data';
-// import { useNavigation } from '@react-navigation/native'
+import CardBlog from '@/components/Card/cardBlog';
+import { blogPosts } from './data';
 import useNavigation from '../../hooks/useNavigation';
+import TextThemed from '@/components/Common/TextThemed';
+import {ThemedView} from '@/components/Common/ViewThemed'
 const BlogPage = () => {
-  const navigaion = useNavigation()
+  const navigaion = useNavigation();
   const handleCardBlogPress = (item: any) => {
-    navigaion.navigate('BlogDetailScreen',{
-      blogDetail: item
-    })
-  }
+    navigaion.navigate('BlogDetailScreen', {
+      blogDetail: item,
+    });
+  };
   return (
-    <SafeAreaView style={{ backgroundColor: '#161622' }} className="flex-1 border-2 border-red-500">
-    <ScrollView>
-      <FlatList
-      // data={[{id: 1}, {id: 2},{id: 3}, {id: 4}]}
-      data={blogPosts}
-      keyExtractor={(item) => item?.id}
-      renderItem={({item, index}) => (
-        <CardBlog blog={item} key={index} onPress={() => handleCardBlogPress(item)} />
-      )}
-      ListHeaderComponent={() => (
-        <View className="my-6 mb-[24px]  mt-[24px] px-4">
-        <View className="mb-6 flex-row items-start">
-          <View>
-            <Text className="font-psemibold text-2xl text-white">Bài viết nổi bật</Text>
-            <Text className="font-pmedium text-sm text-gray-100">
-              Tổng hợp các bài viết chia sẻ về kinh nghiệm tự học lập trình online và các kỹ thuật lập trình web.
-            </Text>
-          </View>
-        </View>
-        </View>
-      )}
-      />
+    <ThemedView>
+      <ScrollView>
+        <FlatList
+          // data={[{id: 1}, {id: 2},{id: 3}, {id: 4}]}
+          data={blogPosts}
+          keyExtractor={(item) => item?.id}
+          renderItem={({ item, index }) => (
+            <CardBlog blog={item} key={index} onPress={() => handleCardBlogPress(item)} />
+          )}
+          ListHeaderComponent={() => (
+            <View className="my-6 mb-[24px]  mt-[24px] px-4">
+              <View className="mb-6 flex-row items-start">
+                <View>
+                  <TextThemed type="title">Bài viết nổi bật</TextThemed>
+                  <TextThemed className='mt-2'>
+                    Tổng hợp các bài viết chia sẻ về kinh nghiệm tự học lập trình online và các kỹ
+                    thuật lập trình web.
+                  </TextThemed>
+                </View>
+              </View>
+            </View>
+          )}
+        />
       </ScrollView>
-    </SafeAreaView>
-  )
-}
+    </ThemedView>
+  );
+};
 
-export default BlogPage
+export default BlogPage;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

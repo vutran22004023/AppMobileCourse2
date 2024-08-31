@@ -1,7 +1,13 @@
 import { Image, StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import {icons} from '@/constants'
-const CardCourse = ({course: {name, image, slug,price,totalVideos,totalTime,view},onPress}: any) => {
+import { useThemeColor } from '@/hooks/useThemeColor';
+interface Prop {
+    lightColor?:string;
+    darkColor?: string;
+}
+const CardCourse = ({course: {name, image, slug,price,totalVideos,totalTime,view},onPress,lightColor,darkColor}: any ) => {
+    const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
   return (
     <TouchableOpacity className='flex-col items-center px-4 mb-14' onPress={onPress} activeOpacity={0.7}>
     <View className='flex-row gap-3 items-start'>
